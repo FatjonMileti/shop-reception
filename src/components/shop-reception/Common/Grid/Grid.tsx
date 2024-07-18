@@ -11,8 +11,8 @@ const Grid: React.FC<GridProps> = (props: GridProps) => {
   return (
     <WrapperComponent className={hasPaper ? s.paperContainer : s.gridContainer} style={gridContainerStyle} maxWidth={maxWidth ?? 'xxl'}>
       <GeneralGrid {...rest} container spacing={spacing ?? 4} style={style}>
-        {items.map(item => (
-          <GeneralGrid item xs={12} md={gridSize} key={item.id}>
+        {items.map((item, index) => (
+          <GeneralGrid item xs={12} md={gridSize} key={index}>
             {item}
           </GeneralGrid>
         ))}

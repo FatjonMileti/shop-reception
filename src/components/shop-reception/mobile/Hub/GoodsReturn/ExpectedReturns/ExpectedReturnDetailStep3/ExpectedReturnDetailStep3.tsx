@@ -110,25 +110,28 @@ const ExpectedReturnDetailStep3 = () => {
   )
 
   const onContinueSubmit = async () => {
-    const payload = {
-      parentId: truck.parentId,
-      truckId: truck.truckId,
-      truckNumber: truck.truckNumber,
-      driverName: truck.driverName,
-      shopNameAndCode: truck.shopNameAndCode,
-      noticeNumber: truck.noticeNumber,
-      nextId: truck.nextId,
-      prevId: truck.prevId,
-      stackNumber: truck.stackNumber,
-      rollsNumber: truck.rollsNumber,
-      supportList: formik.values.supportList
+    try {
+      const payload = {
+        parentId: truck.parentId,
+        truckId: truck.truckId,
+        truckNumber: truck.truckNumber,
+        driverName: truck.driverName,
+        shopNameAndCode: truck.shopNameAndCode,
+        noticeNumber: truck.noticeNumber,
+        nextId: truck.nextId,
+        prevId: truck.prevId,
+        stackNumber: truck.stackNumber,
+        rollsNumber: truck.rollsNumber,
+        supportList: formik.values.supportList
+      }
+      await makeCorePostRequest('/shop-reception-mobile/truck/hub/exit/confirm-supports', payload, null)
+      navigate(`${URLS.AUTH_EXPECTED_RETURN_DETAIL_FINAL}?id=${truckId}`)
+    } catch (error) {
+      showNotification({
+        message: `Error while saving supports. ${formatErrorMessage(error)}`,
+        type: 'error'
+      })
     }
-    await makeCorePostRequest(
-      '/shop-reception-mobile/truck/hub/exit/confirm-supports',
-      payload,
-      null
-    )
-    navigate(`${URLS.AUTH_EXPECTED_RETURN_DETAIL_FINAL}?id=${truckId}`)
   }
 
   const openInvalidTruckNumberModal = async (message, showTerminatButton) => {
@@ -211,10 +214,7 @@ const ExpectedReturnDetailStep3 = () => {
           onChange={e => {
             formik.values.supportList.map((support: any, idx) => {
               if (rowData.id === idx) {
-                formik.setFieldValue(
-                  `supportList[${idx}].confirmedSupportNumber`,
-                  (e.target as HTMLInputElement).value
-                )
+                formik.setFieldValue(`supportList[${idx}].confirmedSupportNumber`, +(e.target as HTMLInputElement).value)
               }
             })
           }}

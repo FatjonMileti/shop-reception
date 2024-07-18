@@ -52,15 +52,12 @@ const ExpectedReturnDetailFinal = () => {
           label: 'Finalizare',
           onClick: async () => {
             try {
-              await makeCorePostRequest(
-                '/shop-reception-mobile/truck/hub/exit/finalise-return/' + truckId,
-                null
-              )
+              await makeCorePostRequest('/shop-reception-mobile/truck/hub/exit/finalise-return/' + truckId, null)
               setIsInvalidTruckNumberModalOpen(false)
               navigate('/goodsReturn')
             } catch (error) {
               showNotification({
-                message: `Error while finalizing return. ${formatErrorMessage(error)}`,
+                message: `${formatErrorMessage(error)} Notice can't be null`,
                 type: 'error'
               })
             }

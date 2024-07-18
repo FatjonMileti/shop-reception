@@ -22,7 +22,7 @@ const DeliveryDetail = () => {
     buttons: []
   })
   const queryClient = useQueryClient()
-  const id = location.state?.truck.id
+  const id = location.state?.truck.id || location.state
 
   const { data: truck, isLoading } = useQuery(
     'validationTruck',
@@ -82,11 +82,9 @@ const DeliveryDetail = () => {
 
   const sentDeliveryTicketToMeti = deliveryTicket => {
     try {
-      makeCorePostRequest('/shop-reception-mobile/metiIntegration/do-integrate', {
-        deliveryTicketId: deliveryTicket.id
-      }).then(() => {
+      makeCorePostRequest('/shop-reception-mobile/meti-integration/do-integrate', { deliveryTicketId: deliveryTicket.id }).then(() => {
         queryClient.invalidateQueries('validationTruck').then(() => {})
-        // localStorage.removeItem(`myData-${this.truckId}`);
+        localStorage.removeItem(`myData-${id}`);
       })
     } catch (error) {
       showNotification({
@@ -108,10 +106,10 @@ const DeliveryDetail = () => {
         <TitleHeader title="VALIDARE LIVRARE" />,
         <>
           <Typography variant="medium" component="p">
-            Numǎr înmatriculare: {truck.truckNumber}
+            Numǎr înmatriculare: {truck?.truckNumber}
           </Typography>
           <Typography variant="medium" component="p">
-            Suporți verificați: {truck.supportCounter} / {truck.totalSupportNumber}
+            Suporți verificați: {truck?.supportCounter} / {truck?.totalSupportNumber}
           </Typography>
         </>,
         <Button

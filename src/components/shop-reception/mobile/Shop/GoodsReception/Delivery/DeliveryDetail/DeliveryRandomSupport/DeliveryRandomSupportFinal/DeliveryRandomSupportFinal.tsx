@@ -30,6 +30,8 @@ const DeliveryRandomSupportFinal = () => {
   const { showNotification } = useNotification()
   const location = useLocation()
   const support = location.state
+  const markOptions = Object.keys(Mark).map(key => ({ value: key, label: Mark[key] }));
+  const defectReasonOptions = Object.keys(DefectReason).map(key => ({ value: key, label: DefectReason[key] }));
 
   const [isSgrProductsModalOpen, setIsSgrProductsModalOpen] = useState(false)
   const [sgrProductsModalContent, setSgrProductsModalContent] = useState({
@@ -65,6 +67,7 @@ const DeliveryRandomSupportFinal = () => {
   const [defectReasons, setDefectReasons] = useState([])
   const [litigation, setLitigation] = useState(0)
   const [showModificaButton, setShowModificaButton] = useState(false)
+  const [imageUploaded, setImageUploaded] = useState(false)
   const [confirmResponse, setConfirmResponse] = useState({ counter: 0, total: 0 })
   const [productScanResp, setProductScanResp] = useState<any>()
 
@@ -74,46 +77,54 @@ const DeliveryRandomSupportFinal = () => {
     validateOnChange: false,
     initialValues: initialValues,
     validationSchema: validationSchema,
-    onSubmit: async (values: any) => {}
-  })
+    onSubmit: async (values: any) => {
+      let submitDlc = values?.dlc
 
-  const onConfirm = () => {
-    const values = formik.values
-
-    let submitDlc = values?.dlc
-    if (submitDlc && typeof submitDlc === 'object') {
-      submitDlc = submitDlc.toISOString().split('T')[0]
-    }
-
-    try {
-      const product = {
-        id: values.productId,
-        name: values.productName,
-        code: values.productCode,
-        ean: values.productEans,
-        eanReceived: values.eanReceived,
-        unit: null,
-        integral: parseFloat(values.currentConformQuantity) || 0,
-        broken: parseFloat(values.currentDefectQuantity) || 0,
-        quantity: values.quantity,
-        shortDlc: values.shortDlc,
-        dlc: submitDlc,
-        defectReason: values.defectReason,
-        mark: values.mark,
-        shopReceptionDeviation: values.shopReceptionDeviation,
-        supportId: support.supportId
+      if (submitDlc && Array.isArray(submitDlc)) {
+        let dateObject = new Date(submitDlc[0], submitDlc[1] - 1, submitDlc[2]);
+        submitDlc = dateObject.toISOString().split('T')[0];
+      } else if (submitDlc instanceof Date) {
+        submitDlc = submitDlc.toISOString().split('T')[0];
+      } else {
+        let dateObject = new Date(submitDlc);
+        submitDlc = dateObject.toISOString().split('T')[0];
       }
-      makeCorePostRequest(`/shop-reception-mobile/aleatory/product/save`, product).then(resp => {
+
+      const mark = markOptions.find(option => option.label === values.mark)
+      const defectReason = defectReasonOptions.find(option => option.label === values.defectReason)
+
+      try {
+        const product = {
+          id: values.productId,
+          name: values.productName,
+          code: values.productCode,
+          ean: values.productEans,
+          eanReceived: values.eanReceived,
+          unit: null,
+          integral: parseFloat(values.currentConformQuantity) || 0,
+          broken: parseFloat(values.currentDefectQuantity) || 0,
+          quantity: values.quantity,
+          shortDlc: values.shortDlc,
+          dlc: submitDlc,
+          defectReason: defectReason.value,
+          mark: mark.value,
+          shopReceptionDeviation: values.shopReceptionDeviation,
+          supportId: support.supportId
+        }
+        const resp = await makeCorePostRequest(`/shop-reception-mobile/aleatory/product/save`, product)
+
         setConfirmResponse({ counter: resp.counter, total: resp.total })
-        formik.resetForm
-      })
-    } catch (error) {
-      showNotification({
-        message: `Error while submitting. ${formatErrorMessage(error)}`,
-        type: 'error'
-      })
+        setLitigation(null)
+        setImageUploaded(false)
+        formik.resetForm()
+      } catch (error) {
+        showNotification({
+          message: `Error while submitting. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      }
     }
-  }
+  })
 
   const onFinalize = () => {
     if (confirmResponse.counter !== confirmResponse.total) {
@@ -134,10 +145,11 @@ const DeliveryRandomSupportFinal = () => {
 
   const doFinalise = () => {
     try {
-      makeCorePostRequest(
-        `/shop-reception-mobile/aleatory/support/close/${support.truckId}`,
-        support.supportId
-      ).then(() => navigate(URLS.AUTH_DELIVERY_DETAIL))
+      makeCorePostRequest(`/shop-reception-mobile/aleatory/support/close/${support.truckId}`, { supportId: support.supportId }, {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }).then(() => navigate(URLS.AUTH_DELIVERY_DETAIL, {state: support.truckId}))
     } catch (error) {
       showNotification({
         message: `Error while submitting. ${formatErrorMessage(error)}`,
@@ -200,10 +212,7 @@ const DeliveryRandomSupportFinal = () => {
 
   const productScan = (supportId, productCode) => {
     try {
-      makeCoreGetRequest(
-        '/shop-reception-mobile/aleatory/product/scan-by-code/' + supportId + '/' + productCode,
-        null
-      ).then(resp => {
+      makeCoreGetRequest('/shop-reception-mobile/aleatory/product/scan-by-code/' + supportId + '/' + productCode, null).then(resp => {
         const scanOk = resp.scanSuccess
         const mess = resp.errorMessage
         const scanStatus = resp.scanStatus
@@ -240,10 +249,7 @@ const DeliveryRandomSupportFinal = () => {
 
   const productScanById = id => {
     try {
-      makeCoreGetRequest(
-        '/shop-reception-mobile/aleatory/product/scan-by-id/' + support.supportId + '/' + id,
-        null
-      ).then(resp => {
+      makeCoreGetRequest('/shop-reception-mobile/aleatory/product/scan-by-id/' + support.supportId + '/' + id, null).then(resp => {
         const scanOk = resp.scanSuccess
         const mess = resp.errorMessage
         const scanStatus = resp.scanStatus
@@ -278,11 +284,12 @@ const DeliveryRandomSupportFinal = () => {
 
   useEffect(() => {
     calculateLitigationType()
-    if (productScanResp) {
-      formik.setFieldValue('mark', productScanResp?.mark)
-      setDefectReasons([productScanResp?.defectReason])
-      formik.setFieldValue('defectReason', productScanResp?.defectReason)
-    }
+
+    // if (productScanResp) {
+    //   formik.setFieldValue('mark', productScanResp?.mark)
+    //   setDefectReasons([productScanResp?.defectReason])
+    //   formik.setFieldValue('defectReason', productScanResp?.defectReason)
+    // }
   }, [formik.values.currentConformQuantity, formik.values.currentDefectQuantity, productScanResp])
 
   const calculateLitigationType = () => {
@@ -292,10 +299,7 @@ const DeliveryRandomSupportFinal = () => {
     const oldDefectValue = parseFloat(formik.values.defect)
     const totalConform = oldConformValue + currentConformValue
     const totalValue = oldConformValue + oldDefectValue + currentConformValue + currentDefectValue
-    const deviation =
-      formik.values.shopReceptionDeviation === null
-        ? 0
-        : formik.values.shopReceptionDeviation / 1000
+    const deviation = !formik.values.shopReceptionDeviation ? 0 : formik.values.shopReceptionDeviation / 1000
 
     if (
       formik.values.quantity > totalConform + deviation &&
@@ -376,19 +380,21 @@ const DeliveryRandomSupportFinal = () => {
     const dlc = resp.shortDlc ? null : resp.dlc
     const conform = resp.validated === null ? 0 : resp.validated
     const defect = resp.broken === null ? 0 : resp.broken
+    const deviation = resp.shopReceptionDeviation ? resp.shopReceptionDeviation : 0
 
     formik.setValues({
+      productCode: '',
       productName: resp.productName,
       productEans: resp.productEans,
       productDlc: resp.dlc,
       productId: resp.productId,
       quantity: resp.quantity,
       eanReceived: resp.eanReceived,
-      shopReceptionDeviation: resp.shopReceptionDeviation,
+      shopReceptionDeviation: deviation,
       alreadyScanned: resp.alreadyScanned,
       conform: conform,
       defect: defect,
-      dlc: resp.dlc,
+      dlc: dlc,
       shortDlc: resp.shortDlc,
       defectReason: resp.defectReason,
       mark: resp.mark,
@@ -403,6 +409,8 @@ const DeliveryRandomSupportFinal = () => {
       message: 'Image uploaded successfully',
       type: 'success'
     })
+
+    setImageUploaded(true);
   }
 
   const handleError = error => {
@@ -640,6 +648,7 @@ const DeliveryRandomSupportFinal = () => {
           ]}
           itemsPerRow={1}
         />,
+        support.productList.length > 0 &&
         <Input
           type="select"
           label="Selectează produs vrac"
@@ -664,6 +673,8 @@ const DeliveryRandomSupportFinal = () => {
             fullWidth
             value={formik.values.productCode}
             onChange={event => formik.setFieldValue('productCode', event.target.value)}
+            autoFocus
+            id="scan-input"
             error={!!formik.errors.productCode}
             helperText={formik.errors.productCode ? String(formik.errors.productCode) : ''}
           />
@@ -677,7 +688,7 @@ const DeliveryRandomSupportFinal = () => {
           type="button"
           variant="contained"
           label="SCANEAZǍ PRODUSE"
-          onClick={null}
+          onClick={() => document.getElementById('scan-input').focus()}
         />,
         formik.values.productEans && (
           <Table
@@ -735,8 +746,9 @@ const DeliveryRandomSupportFinal = () => {
             type="button"
             variant="contained"
             label="CONFIRMĂ CANTITĂȚI"
-            onClick={() => onConfirm()}
+            onClick={() => formik.handleSubmit()}
             style={{ width: '100%' }}
+            disabled={(litigation === 2 && !imageUploaded) || (litigation === 1 && formik.values.mark === '' && formik.values.defectReason === '')}
           />
         ),
         showModificaButton && (
@@ -748,7 +760,7 @@ const DeliveryRandomSupportFinal = () => {
             style={{ width: '100%' }}
           />
         ),
-        support?.supportCounter > 0 && (
+        !formik.values.productEans && (
           <Button
             type="button"
             variant="contained"
@@ -757,45 +769,47 @@ const DeliveryRandomSupportFinal = () => {
             style={{ width: '100%' }}
           />
         ),
-        <AlertModal
-          open={isSgrProductsModalOpen}
-          handleClose={closeSgrProductsModal}
-          title={sgrProductsModalContent.title}
-          listItems={sgrProductsModalContent.listItems}
-          buttons={sgrProductsModalContent.buttons}
-        />,
-        <AlertModal
-          open={isProductScanModalOpen}
-          handleClose={closeProductScanMessage}
-          title={productScanModalContent.title}
-          description={productScanModalContent.description}
-          buttons={productScanModalContent.buttons}
-        />,
-        <AlertModal
-          open={isCodeAndEanNotPresentModalOpen}
-          handleClose={closeCodeAndEanNotPresentConfirmation}
-          title={codeAndEanNotPresentModalContent.title}
-          buttons={codeAndEanNotPresentModalContent.buttons}
-        />,
-        <AlertModal
-          open={isEanNotPresentModalOpen}
-          handleClose={closeEanNotPresentConfirmation}
-          title={eanNotPresentModalContent.title}
-          buttons={eanNotPresentModalContent.buttons}
-        />,
-        <AlertModal
-          open={isSgrMessageModalOpen}
-          handleClose={closeSgrMessage}
-          title={sgrMessageModalContent.title}
-          buttons={sgrMessageModalContent.buttons}
-        />,
-        <AlertModal
-          open={isMissingProductsConfirmModalOpen}
-          handleClose={closeMissingProductsConfirm}
-          title={MissingProductsConfirmModalContent.title}
-          listItems={MissingProductsConfirmModalContent.listItems}
-          buttons={MissingProductsConfirmModalContent.buttons}
-        />
+        <>
+          <AlertModal
+            open={isSgrProductsModalOpen}
+            handleClose={closeSgrProductsModal}
+            title={sgrProductsModalContent.title}
+            listItems={sgrProductsModalContent.listItems}
+            buttons={sgrProductsModalContent.buttons}
+          />,
+          <AlertModal
+            open={isProductScanModalOpen}
+            handleClose={closeProductScanMessage}
+            title={productScanModalContent.title}
+            description={productScanModalContent.description}
+            buttons={productScanModalContent.buttons}
+          />,
+          <AlertModal
+            open={isCodeAndEanNotPresentModalOpen}
+            handleClose={closeCodeAndEanNotPresentConfirmation}
+            title={codeAndEanNotPresentModalContent.title}
+            buttons={codeAndEanNotPresentModalContent.buttons}
+          />,
+          <AlertModal
+            open={isEanNotPresentModalOpen}
+            handleClose={closeEanNotPresentConfirmation}
+            title={eanNotPresentModalContent.title}
+            buttons={eanNotPresentModalContent.buttons}
+          />,
+          <AlertModal
+            open={isSgrMessageModalOpen}
+            handleClose={closeSgrMessage}
+            title={sgrMessageModalContent.title}
+            buttons={sgrMessageModalContent.buttons}
+          />,
+          <AlertModal
+            open={isMissingProductsConfirmModalOpen}
+            handleClose={closeMissingProductsConfirm}
+            title={MissingProductsConfirmModalContent.title}
+            listItems={MissingProductsConfirmModalContent.listItems}
+            buttons={MissingProductsConfirmModalContent.buttons}
+          />
+        </>
       ]}
       itemsPerRow={1}
     />

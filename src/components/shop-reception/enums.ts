@@ -6,24 +6,24 @@ export enum PermissionRoles {
 }
 
 export enum Mark {
-  VEGETABLES_FRUITS = 'VEGETABLES_FRUITS',
-  DAMAGED = 'DAMAGED',
-  SHORT_TERM = 'SHORT_TERM',
-  EXPIRED = 'EXPIRED',
-  VEGETABLE_FRUIT_QUALITY = 'VEGETABLE_FRUIT_QUALITY',
-  DETERIORATION_A = 'DETERIORATION_A',
-  QUANTITATIVE_DIFFERENCE_A = 'QUANTITATIVE_DIFFERENCE_A',
-  MISSING_BAX = 'MISSING_BAX',
-  QUANTITATIVE_DIFFERENCE = 'QUANTITATIVE_DIFFERENCE',
-  MISSING_CARRIER = 'MISSING_CARRIER',
-  PALLETS_MERCHANDISE_MISSING = 'PALLETS_MERCHANDISE_MISSING',
-  VOLUME = 'VOLUME'
+  VEGETABLES_FRUITS = 'Legume fructe',
+  DAMAGED = 'Deteriorate',
+  SHORT_TERM = 'Termen Scurt',
+  EXPIRED = 'Expirate',
+  VEGETABLE_FRUIT_QUALITY = 'Calitate legume fructe',
+  DETERIORATION_A = 'Deteriorare-A',
+  QUANTITATIVE_DIFFERENCE_A = 'Diferenta cantitativa-A',
+  MISSING_BAX = 'Lipsa Bax',
+  QUANTITATIVE_DIFFERENCE = 'Diferenta cantitativa',
+  MISSING_CARRIER = 'Lipsa transportator',
+  PALLETS_MERCHANDISE_MISSING = 'Paleti marfa lipsa',
+  VOLUME = 'VOL'
 }
 
 export enum DefectReason {
-  PROVIDER = 'PROVIDER',
-  TRANSPORTER = 'TRANSPORTER',
-  SHOP = 'SHOP'
+  PROVIDER = 'Prestator',
+  TRANSPORTER = 'Transportator',
+  SHOP = 'Magazin'
 }
 
 export enum ScanStatus {
