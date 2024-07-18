@@ -195,7 +195,7 @@ const SupportScanStep2 = () => {
   const doSaveSupportTypes = values => {
     try {
       makeCorePostRequest(
-        `/shop-reception-mobile/support/shop/save/${main}/${truckId}/${supportId}`,
+        `/shop-reception-mobile/support/shop/save/list/${main}/${truckId}/${supportId}`,
         values
       ).then(resp => {
         if (resp.priorityProducts?.length > 0) {
