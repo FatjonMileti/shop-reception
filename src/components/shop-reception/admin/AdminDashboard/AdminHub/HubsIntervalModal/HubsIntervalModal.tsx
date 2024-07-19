@@ -28,7 +28,7 @@ const HubsIntervalModal: React.FC<HubsIntervalModalProps> = props => {
   const [initialValues, setInitialValues] = useState([])
 
   useQuery(
-    ['hubs-delivery-interval'],
+    ['hubs-delivery-interval', item.id, isOpen],
     async () => {
       const response = await makeCoreGetRequest(`/shop-reception/hubs/delivery-interval/${item.id}`)
       const values = toTableRowItems(response)

@@ -185,7 +185,7 @@ export const drawerFilters = (
   locationOptions
 ) => [
   {
-    name: 'shopName',
+    name: 'shopCode',
     value: undefined,
     filter: (
       <Autocomplete
