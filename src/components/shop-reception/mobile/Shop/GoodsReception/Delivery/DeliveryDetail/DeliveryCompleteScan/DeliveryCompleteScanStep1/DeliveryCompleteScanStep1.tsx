@@ -16,14 +16,12 @@ const DeliveryCompleteScanStep1 = () => {
 
   const { truckId, ticketId } = location.state
 
-  const [supportCode, setSupportCode] = useState(null)
+  const [supportCode, setSupportCode] = useState('')
 
   const { data: ticketSummary, isLoading: isLoadingTicketSummary } = useQuery(
     ['ticket-summary'],
     async () => {
-      const response = await makeCoreGetRequest(
-        `/shop-reception-mobile/integral/ticket/summary/${truckId}/${ticketId}`
-      )
+      const response = await makeCoreGetRequest(`/shop-reception-mobile/integral/ticket/summary/${truckId}/${ticketId}`, null)
       return response || []
     },
     {
@@ -43,9 +41,7 @@ const DeliveryCompleteScanStep1 = () => {
   } = useQuery(
     ['truck'],
     async () => {
-      const response = await makeCoreGetRequest(
-        `/shop-reception-mobile/integral/support/scan/${supportCode}?truckId=${truckId}&ticketId=${ticketId}`
-      )
+      const response = await makeCoreGetRequest(`/shop-reception-mobile/integral/support/scan/${supportCode}?truckId=${truckId}&ticketId=${ticketId}`, null)
       return response || []
     },
     {

@@ -63,9 +63,9 @@ const DeliveryRandomProduct = () => {
 
   const search = async (id, supportCode) => {
     try {
-      await makeCorePostRequest('/shop-reception-mobile/aleatory/support/scan/' + id, supportCode, {
+      await makeCorePostRequest('/shop-reception-mobile/aleatory/support/scan/' + id, { supportCode: supportCode }, {
         headers: {
-          'Content-Type': 'text/plain'
+          'Content-Type': 'application/json'
         }
       }).then(handleScanResponse)
     } catch (error) {
@@ -83,7 +83,7 @@ const DeliveryRandomProduct = () => {
     if (scanOk !== true) {
       openSupportScanModal(mess)
     } else {
-      navigate(URLS.AUTH_DELIVERY_RANDOM_PRODUCT_FINAL, { state: { ...truck, ...resp, support } })
+      navigate(URLS.AUTH_DELIVERY_RANDOM_PRODUCT_FINAL, { state: { ...resp, ...truck, support } })
       formik.setFieldValue('supportCode', '')
     }
   }
@@ -144,6 +144,8 @@ const DeliveryRandomProduct = () => {
             onChange={event =>
               formik.setFieldValue('supportCode', (event.target as HTMLInputElement).value)
             }
+            autoFocus
+            id="scan-input"
             error={!!formik.errors.supportCode}
             helperText={formik.errors.supportCode as string}
           />
@@ -156,7 +158,7 @@ const DeliveryRandomProduct = () => {
           type="button"
           variant="contained"
           label="SCANEAZǍ SUPORT"
-          onClick={() => console.log('Scanning...')}
+          onClick={() => document.getElementById('scan-input').focus()}
           style={{ width: '100%' }}
         />,
         <AlertModal

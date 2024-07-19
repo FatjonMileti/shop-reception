@@ -18,9 +18,7 @@ const DeliveryCompleteScan = () => {
   const { data: truck, isLoading: isLoadingTruck } = useQuery(
     ['truck'],
     async () => {
-      const response = await makeCoreGetRequest(
-        `/shop-reception-mobile/integral/truck/delivery-tickets/${truckId}`
-      )
+      const response = await makeCoreGetRequest(`/shop-reception-mobile/integral/truck/delivery-tickets/${truckId}`, null)
       return response || []
     },
     {

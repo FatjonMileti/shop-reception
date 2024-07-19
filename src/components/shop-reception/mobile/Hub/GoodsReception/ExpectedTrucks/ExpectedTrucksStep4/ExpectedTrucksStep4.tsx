@@ -68,7 +68,7 @@ const ExpectedTrucksStep4 = () => {
 
   const confirmList = async (values: any) => {
     await makeCorePostRequest(
-      `/shop-reception-mobile/support/shop/save/true/${truckId}/${supportId}`,
+      `/shop-reception-mobile/support/shop/save/list/true/${truckId}/${supportId}`,
       values.typeOptions
     )
   }

@@ -211,7 +211,7 @@ const SupportScanStep3 = () => {
   const doSaveSupportTypes = async values => {
     try {
       await makeCorePostRequest(
-        `/shop-reception-mobile/support/shop/save/${false}/${truckId}/${supportId}`,
+        `/shop-reception-mobile/support/shop/save/list/${false}/${truckId}/${supportId}`,
         values
       ).then(() => navigate(URLS.AUTH_SUPPORT_SCAN_STEP_1, { state: truckId }))
     } catch (error) {
