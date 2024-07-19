@@ -16,15 +16,17 @@ export const columns = [
   },
   {
     title: 'Familie',
-    field: 'famName',
+    field: 'famCode',
     align: 'left',
-    type: 'string'
+    type: 'string',
+    render: row => row.famName
   },
   {
     title: 'Raion',
-    field: 'rayName',
+    field: 'rayCode',
     align: 'left',
-    type: 'string'
+    type: 'string',
+    render: row => row.rayName
   },
   {
     title: 'Prag valabilitate',

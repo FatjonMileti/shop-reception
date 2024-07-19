@@ -71,7 +71,8 @@ export const getFilters = ({
   shopOptions,
   despositsOptions,
   parentSocietyOptions,
-  nonCompliantReasonOptions
+  nonCompliantReasonOptions,
+  supportTypeOptions
 }) => [
   {
     name: 'shopCode',
@@ -85,7 +86,7 @@ export const getFilters = ({
       />
     ),
     type: 'autocomplete',
-    label: 'Selecteaza depozit'
+    label: 'Magazin'
   },
   {
     name: 'depositId',
@@ -99,7 +100,7 @@ export const getFilters = ({
       />
     ),
     type: 'autocomplete',
-    label: 'Selecteaza Depozit'
+    label: 'Depozit'
   },
   {
     name: 'parentSociety',
@@ -113,7 +114,21 @@ export const getFilters = ({
       />
     ),
     type: 'autocomplete',
-    label: 'Selecteaza Societate'
+    label: 'Societate'
+  },
+  {
+    name: 'supportType',
+    value: undefined,
+    filter: (
+      <Autocomplete
+        variant="outlined"
+        label="Selecteaza tip suport"
+        options={supportTypeOptions || []}
+        multiple
+      />
+    ),
+    type: 'autocomplete',
+    label: 'Tip suport'
   },
   {
     name: 'nonCompliantReason',

@@ -13,7 +13,8 @@ import {
   getDepositOptions,
   getParentSocietyOptions,
   getShopOptions,
-  getNonCompliantReasonOptions
+  getNonCompliantReasonOptions,
+  getSupportTypeOptions
 } from '../../api'
 
 const PackagingCompliance = () => {
@@ -28,6 +29,7 @@ const PackagingCompliance = () => {
   const { data: despositsOptions } = getDepositOptions(showNotification)
   const { data: parentSocietyOptions } = getParentSocietyOptions(showNotification)
   const { data: nonCompliantReasonOptions } = getNonCompliantReasonOptions(showNotification)
+  const { data: supportTypeOptions } = getSupportTypeOptions(showNotification)
 
   const filters = useMemo(
     () =>
@@ -35,9 +37,10 @@ const PackagingCompliance = () => {
         shopOptions,
         despositsOptions,
         parentSocietyOptions,
-        nonCompliantReasonOptions
+        nonCompliantReasonOptions,
+        supportTypeOptions
       }),
-    [shopOptions, despositsOptions, parentSocietyOptions, nonCompliantReasonOptions]
+    [shopOptions, despositsOptions, parentSocietyOptions, nonCompliantReasonOptions, supportTypeOptions]
   )
 
   const downloadImage = async id => {

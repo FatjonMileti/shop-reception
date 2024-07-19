@@ -103,7 +103,7 @@ export const getSupportTypeOptions = (
       const data = await makeCoreGetRequest('/shop-reception/support-flows/support-types')
       return data.map(item => ({
         label: item.name,
-        value: item.id
+        value: item.code
       }))
     },
     {
