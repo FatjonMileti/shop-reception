@@ -54,7 +54,7 @@ const ImageUpload = ({
       })
       if (onSuccess) {
         setFile(file)
-        onSuccess(response)
+        onSuccess(response, file)
         handleClose()
       }
     } catch (err) {

@@ -59,7 +59,7 @@ VALUES
     (17, 'Receptie marfa HUB', 'ProjectTeamGovernance', '/goodsReceptionHub', true, 6),
     (18, 'Returnare ambalaje/marfa HUB', 'ProjectTeamGovernance', '/goodsReturnHub', true, 6),
     (19, 'Returnare ambalaje/marfa depozit', 'ProjectTeamGovernance', '/goodsReturnDeposit', true, 6),
-    (21, 'Actualizare inventar ambalaje', 'ProjectTeamGovernance', '/goodsReception', true, 6),
+    (21, 'Actualizare inventar ambalaje', 'ProjectTeamGovernance', '/packageInventoryUpdate', true, 6),
     -- Lost Sales Opportunities
     (20, 'Alerte LSO', 'AlertIcon', '/lostSalesAlerts', true, 7);
 

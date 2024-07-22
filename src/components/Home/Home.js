@@ -1,8 +1,8 @@
+import { useEffect, useState } from 'react'
 import { Salutation, WeatherWidget } from '@fullscreendigital/carrefour-dex-fe'
-import { Chip, CircularProgress, Grid } from '@mui/material'
+import { Chip, Grid } from '@mui/material'
 import { Icon_v2 } from 'components/core-ui/Icon_v2'
 import { useGetLocation } from 'hooks'
-import { Fragment, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getUserFirstName } from '../../utils/authService'
 import s from '../ServiceDomain/ServiceDomain.scss'
@@ -10,9 +10,13 @@ import s from '../ServiceDomain/ServiceDomain.scss'
 const Home = ({ modules, setSubdomainId }) => {
   const navigate = useNavigate()
 
-  const [selectedModule, setSelectedModule] = useState(modules[0])
+  const [selectedModule, setSelectedModule] = useState(null)
   const { location, loading: isLocationLoading, error: isErrorGettingLocation } = useGetLocation()
   const username = getUserFirstName()
+
+  useEffect(() => {
+    setSelectedModule(modules[0])
+  }, [modules])
 
   return (
     <div className={s.modulePaper}>

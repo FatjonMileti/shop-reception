@@ -80,12 +80,11 @@ const DeliveryDetail = () => {
     setIsConfirmIntegrationModalOpen(false)
   }
 
-  const sentDeliveryTicketToMeti = deliveryTicket => {
+  const sentDeliveryTicketToMeti = async deliveryTicket => {
     try {
-      makeCorePostRequest('/shop-reception-mobile/meti-integration/do-integrate', { deliveryTicketId: deliveryTicket.id }).then(() => {
-        queryClient.invalidateQueries('validationTruck').then(() => {})
-        localStorage.removeItem(`myData-${id}`);
-      })
+      await makeCorePostRequest('/shop-reception-mobile/meti-integration/do-integrate', { deliveryTicketId: deliveryTicket.id })
+      queryClient.invalidateQueries('validationTruck').then(() => {})
+      localStorage.removeItem(`myData-${id}`);
     } catch (error) {
       showNotification({
         message: `Error while sending data. ${formatErrorMessage(error)}`,

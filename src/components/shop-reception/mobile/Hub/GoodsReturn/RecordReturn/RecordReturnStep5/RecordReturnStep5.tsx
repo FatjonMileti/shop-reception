@@ -101,7 +101,7 @@ const ContinueReturnDetailFinal = () => {
       makeCorePostRequest(
         '/shop-reception-mobile/truck/hub/return/registration/save-notice/' + id,
         truck
-      ).then(() => navigate('/goodsReturn'))
+      ).then(() => navigate('/goodsReturnHub'))
     } catch (error) {
       showNotification({
         message: `Error while saving truck. ${formatErrorMessage(error)}`,

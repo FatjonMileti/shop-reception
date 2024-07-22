@@ -54,7 +54,7 @@ const ExpectedReturnDetailFinal = () => {
             try {
               await makeCorePostRequest('/shop-reception-mobile/truck/hub/exit/finalise-return/' + truckId, null)
               setIsInvalidTruckNumberModalOpen(false)
-              navigate('/goodsReturn')
+              navigate('/goodsReturnHub')
             } catch (error) {
               showNotification({
                 message: `${formatErrorMessage(error)} Notice can't be null`,

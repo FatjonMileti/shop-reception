@@ -13,7 +13,7 @@ import ImageUpload from '../../../Common/ImageUpload/ImageUpload'
 import { useLocation, useNavigate } from 'react-router-dom'
 import AlertModal from '../../../Common/AlertModal/AlertModal'
 import { URLS } from '../../../constants'
-import { CircularProgress } from '@mui/material'
+import { Box, CircularProgress } from '@mui/material'
 
 const SupportScanStep2 = () => {
   const { showNotification } = useNotification()
@@ -61,6 +61,8 @@ const SupportScanStep2 = () => {
     buttons: []
   })
   const [getSecondarySupport, setGetSecondarySupport] = useState(false)
+
+  const [images, setImages] = useState([])
 
   const validationSchema = useMemo(() => getValidationSchema(), [])
 
@@ -112,10 +114,13 @@ const SupportScanStep2 = () => {
     'SupportPrincipalType',
     async () => {
       const support = await makeCoreGetRequest('/shop-reception-mobile/support/shop/principal/type')
-      await formik.setFieldValue('supportType', support.map(support => ({
-        ...support,
-        imageUploaded: false
-      })))
+      await formik.setFieldValue(
+        'supportType',
+        support.map(support => ({
+          ...support,
+          imageUploaded: false
+        }))
+      )
       return support
     },
     {
@@ -136,8 +141,10 @@ const SupportScanStep2 = () => {
     return <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
   }
 
-  const handleSuccess = id => {
+  const handleSuccess = (id, file) => {
     formik.setFieldValue(`supportType[${id}].imageUploaded`, true)
+
+    images.push({ id, file })
 
     showNotification({
       message: 'Image uploaded successfully',
@@ -155,34 +162,48 @@ const SupportScanStep2 = () => {
       title: 'CANTITATE',
       field: 'received',
       align: 'center',
-      render: (rowData: any) => (
-        <div>
-          <Input
-            type="number"
-            value={rowData.received}
-            onChange={e => {
-              Number((e.target as HTMLInputElement).value) >= 0 &&
-                formik.values.supportType.map((support, idx) => {
-                  if (rowData.id === idx) {
-                    formik.setFieldValue(
-                      `supportType[${idx}].received`,
-                      Number((e.target as HTMLInputElement).value)
-                    )
-                  }
-                })
-            }}
-            variant="standard"
-          />
-          {supportTypeList[rowData.id].received !=
-            formik.values.supportType[rowData.id].received && (
-            <ImageUpload
-              uploadUrl={`/shop-reception-mobile/support/shop/upload/` + rowData.id}
-              onSuccess={() => handleSuccess(rowData.id)}
-              onError={handleError}
+      render: (rowData: any) => {
+        const image = images.find(image => image.id === rowData.id)
+        return (
+          <div>
+            <Input
+              type="number"
+              value={rowData.received}
+              onChange={e => {
+                Number((e.target as HTMLInputElement).value) >= 0 &&
+                  formik.values.supportType.map((support, idx) => {
+                    if (rowData.id === idx) {
+                      formik.setFieldValue(
+                        `supportType[${idx}].received`,
+                        Number((e.target as HTMLInputElement).value)
+                      )
+                    }
+                  })
+              }}
+              variant="standard"
             />
-          )}
-        </div>
-      )
+            {supportTypeList[rowData.id].received !==
+              formik.values.supportType[rowData.id].received && (
+              <>
+                {image ? (
+                  <Box>
+                    <img
+                      src={URL.createObjectURL(image.file)}
+                      style={{ maxWidth: '300px', maxHeight: '300px', objectFit: 'cover' }}
+                    />
+                  </Box>
+                ) : (
+                  <ImageUpload
+                    uploadUrl={`/shop-reception-mobile/support/shop/upload/${rowData.id}`}
+                    onSuccess={(response, file) => handleSuccess(rowData.id, file)}
+                    onError={handleError}
+                  />
+                )}
+              </>
+            )}
+          </div>
+        )
+      }
     }
   ]
 

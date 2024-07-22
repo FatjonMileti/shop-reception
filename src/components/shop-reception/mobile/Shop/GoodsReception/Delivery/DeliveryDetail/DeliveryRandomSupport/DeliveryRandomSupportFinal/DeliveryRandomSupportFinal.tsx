@@ -34,35 +34,18 @@ const DeliveryRandomSupportFinal = () => {
   const defectReasonOptions = Object.keys(DefectReason).map(key => ({ value: key, label: DefectReason[key] }));
 
   const [isSgrProductsModalOpen, setIsSgrProductsModalOpen] = useState(false)
-  const [sgrProductsModalContent, setSgrProductsModalContent] = useState({
-    title: '',
-    listItems: [],
-    buttons: []
-  })
+  const [sgrProductsModalContent, setSgrProductsModalContent] = useState({ title: '', listItems: [], buttons: [] })
   const [isProductScanModalOpen, setIsProductScanModalOpen] = useState(false)
-  const [productScanModalContent, setProductScanModalContent] = useState({
-    title: '',
-    description: '',
-    buttons: []
-  })
+  const [productScanModalContent, setProductScanModalContent] = useState({ title: '', description: '', buttons: [] })
   const [isEanNotPresentModalOpen, setIsEanNotPresentModalOpen] = useState(false)
-  const [eanNotPresentModalContent, setEanNotPresentModalContent] = useState({
-    title: '',
-    buttons: []
-  })
+  const [eanNotPresentModalContent, setEanNotPresentModalContent] = useState({ title: '', buttons: [] })
   const [isCodeAndEanNotPresentModalOpen, setIsCodeAndEanNotPresentModalOpen] = useState(false)
-  const [codeAndEanNotPresentModalContent, setCodeAndEanNotPresentModalContent] = useState({
-    title: '',
-    buttons: []
-  })
+  const [codeAndEanNotPresentModalContent, setCodeAndEanNotPresentModalContent] = useState({ title: '', buttons: [] })
   const [isSgrMessageModalOpen, setIsSgrMessageModalOpen] = useState(false)
   const [sgrMessageModalContent, setSgrMessageModalContent] = useState({ title: '', buttons: [] })
   const [isMissingProductsConfirmModalOpen, setIsMissingProductsConfirmModalOpen] = useState(false)
-  const [MissingProductsConfirmModalContent, setMissingProductsConfirmModalContent] = useState({
-    title: '',
-    listItems: [],
-    buttons: []
-  })
+  const [MissingProductsConfirmModalContent, setMissingProductsConfirmModalContent] = useState({ title: '', listItems: [], buttons: [] })
+
   const [marks, setMarks] = useState<string[]>([])
   const [defectReasons, setDefectReasons] = useState([])
   const [litigation, setLitigation] = useState(0)
