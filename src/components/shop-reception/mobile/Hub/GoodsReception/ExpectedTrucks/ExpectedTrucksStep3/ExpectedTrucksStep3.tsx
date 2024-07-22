@@ -96,8 +96,8 @@ const ExpectedTrucksStep3 = () => {
 
   const scan = async values => {
     const response = await makeCorePostRequest(
-      `/shop-reception-mobile/support/hub/scan/${truckId}`,
-      { truckId: values }
+      `/shop-reception-mobile/support/hub/scan-by-code/${truckId}`,
+      { supportCode: values }
     )
 
     return response
