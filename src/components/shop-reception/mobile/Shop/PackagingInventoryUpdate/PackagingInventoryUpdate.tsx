@@ -23,6 +23,11 @@ const PackagingInventoryUpdate = () => {
     onSubmit: async (values: any) => {
       try {
         await makeCorePostRequest('/shop-reception-mobile/support/shop/inventory/save', values)
+
+        showNotification({
+          message: `Inventory updated successfully.`,
+          type: 'success'
+        })
         clearFields()
       } catch (error) {
         showNotification({
@@ -36,8 +41,8 @@ const PackagingInventoryUpdate = () => {
   function clearFields() {
     setSelectedSupportId('')
     formik.setFieldValue('supportId', null)
-    formik.setFieldValue('quality', 0)
-    formik.setFieldValue('defective', 0)
+    formik.setFieldValue('conform', 0)
+    formik.setFieldValue('defect', 0)
   }
 
   const [selectedSupportId, setSelectedSupportId] = useState(formik.values.supportId || '')
@@ -61,7 +66,7 @@ const PackagingInventoryUpdate = () => {
     'shopCode',
     async () => {
       const shopCode = await makeCoreGetRequest('/shop-reception-mobile/home/shop-code', null)
-      await formik.setFieldValue('shopCode', Number(shopCode.value))
+      await formik.setFieldValue('shopId', Number(shopCode.value))
 
       return shopCode.value
     },
@@ -121,12 +126,12 @@ const PackagingInventoryUpdate = () => {
           label="Calitativi"
           variant="standard"
           width="100%"
-          value={formik.values.quality}
+          value={formik.values.conform}
           onChange={event =>
-            formik.setFieldValue('quality', +(event.target as HTMLInputElement).value)
+            formik.setFieldValue('conform', +(event.target as HTMLInputElement).value)
           }
-          error={!!formik.errors.quality}
-          helperText={formik.errors.quality as string}
+          error={!!formik.errors.conform}
+          helperText={formik.errors.conform as string}
         />,
         <div>
           <Input
@@ -134,14 +139,14 @@ const PackagingInventoryUpdate = () => {
             label="Defecți"
             variant="standard"
             width="100%"
-            value={formik.values.defective}
+            value={formik.values.defect}
             onChange={event =>
-              formik.setFieldValue('defective', +(event.target as HTMLInputElement).value)
+              formik.setFieldValue('defect', +(event.target as HTMLInputElement).value)
             }
-            error={!!formik.errors.defective}
-            helperText={formik.errors.defective as string}
+            error={!!formik.errors.defect}
+            helperText={formik.errors.defect as string}
           />
-          {formik.values.defective > 0 && +selectedSupportId > 0 && (
+          {formik.values.defect > 0 && +selectedSupportId > 0 && (
             <ImageUpload
               uploadUrl={'/shop-reception-mobile/support/shop/upload/' + selectedSupportId}
               onSuccess={handleSuccess}
