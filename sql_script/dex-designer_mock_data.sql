@@ -55,10 +55,10 @@ VALUES
     (22, 'Rapoarte istorice (mai vechi de 2 luni)', 'ProjectTeamGovernance', '/historical', true, 5),
     -- Shop Reception (Mobile)
     (15, 'Receptie marfa', 'ProjectTeamGovernance', '/goodsReception', true, 6),
-    (16, 'Returnare marfa', 'ProjectTeamGovernance', '/goodsReturn', true, 6),
+    (16, 'Returnare ambalaje/marfa', 'ProjectTeamGovernance', '/goodsReturn', true, 6),
     (17, 'Receptie marfa HUB', 'ProjectTeamGovernance', '/goodsReceptionHub', true, 6),
-    (18, 'Returnare marfa HUB', 'ProjectTeamGovernance', '/goodsReturnHub', true, 6),
-    (19, 'Returnare marfa depozit', 'ProjectTeamGovernance', '/goodsReturnDeposit', true, 6),
+    (18, 'Returnare ambalaje/marfa HUB', 'ProjectTeamGovernance', '/goodsReturnHub', true, 6),
+    (19, 'Returnare ambalaje/marfa depozit', 'ProjectTeamGovernance', '/goodsReturnDeposit', true, 6),
     (21, 'Actualizare inventar ambalaje', 'ProjectTeamGovernance', '/goodsReception', true, 6),
     -- Lost Sales Opportunities
     (20, 'Alerte LSO', 'AlertIcon', '/lostSalesAlerts', true, 7);

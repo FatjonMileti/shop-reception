@@ -16,3 +16,5 @@ export const initialValues = {
   driverName: null,
   sealList: [{ code: null }]
 }
+
+export const isEmpty = value => value === null || value.length === 0

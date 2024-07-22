@@ -10,6 +10,7 @@ import { useState } from 'react'
 import ImageUpload from 'components/shop-reception/mobile/Common/ImageUpload/ImageUpload'
 import { useFormik } from 'formik'
 import { toBoolean } from 'utils/helpers'
+import { TitleHeader } from 'components/shop-reception/mobile/Common/TitleHeader'
 
 const ExpectedTrucksStep2 = () => {
   const navigate = useNavigate()
@@ -20,28 +21,62 @@ const ExpectedTrucksStep2 = () => {
 
   const [isImageUploaded, setIsImageUploaded] = useState(null)
 
-  const { data: hubName, isLoading: isLoadingHubName } = useQuery(
-    ['hub-name'],
-    async () => {
-      const response = await makeCoreGetRequest(`/shop-reception-mobile/home/hub-name`)
-      return response || []
-    },
-    {
-      onError: error => {
-        showNotification({
-          message: `A aparut o eroare. ${formatErrorMessage(error)}`,
-          type: 'error'
-        })
-      }
-    }
-  )
-
   const { data: truck, isLoading: isTruckLoading } = useQuery(
     ['truck'],
     async () => {
       const response = await makeCoreGetRequest(`/shop-reception-mobile/truck/hub/${item.value}`)
 
-      return response
+      // return response
+
+      return {
+        id: 0,
+        depositId: 0,
+        depositName: 'string',
+        depositDocumentList: [
+          {
+            depositId: 0,
+            depositName: 'string',
+            hasNotice: true,
+            hasTransportNote: true
+          }
+        ],
+        status: 'string',
+        hubId: 0,
+        hubName: 'string',
+        hubCode: 'string',
+        shopCode: 'string',
+        shopName: 'string',
+        truckNumber: 'string',
+        transportCode: 'string',
+        shopTemperature: 0,
+        registeredDate: 'string',
+        createdBy: 'string',
+        ticketCodeList: ['string', 'string2'],
+        sealList: [
+          {
+            id: 0,
+            code: 'string',
+            type: 'string',
+            broken: true,
+            userMessage: 'string'
+          }
+        ],
+        supportList: [
+          {
+            id: 0,
+            supportCode: 'string',
+            supportNumber: 'string',
+            ticketNumber: 'string',
+            truckNumber: 'string',
+            driverName: 'string',
+            arrivalDate: 'string',
+            sensitiveProducts: true,
+            shortDlcProducts: true,
+            sgrProducts: true
+          }
+        ],
+        flowType: 'IN_HUB'
+      }
     },
     {
       onError: error => {
@@ -82,7 +117,7 @@ const ExpectedTrucksStep2 = () => {
     }
   })
 
-  if (isLoadingHubName || isTruckLoading || typeof formik.values === 'undefined') {
+  if (isTruckLoading || typeof formik.values === 'undefined') {
     return (
       <div style={{ display: 'flex' }}>
         <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
@@ -92,14 +127,21 @@ const ExpectedTrucksStep2 = () => {
 
   return (
     <Grid container spacing={2} justifyContent={'center'}>
-      <Grid xs={12} item>
-        <Typography
-          component="h2"
-          variant="medium"
-          style={{ textAlign: 'center', textTransform: 'uppercase' }}
-          pt={2}
-        >
-          {hubName.value}
+      <TitleHeader title="" />
+      <Grid xs={10} item display="flex" justifyContent="center">
+        <Typography component="p" variant="medium" style={{ textAlign: 'center', color: 'black' }}>
+          Numar inmatriculare: {truck.truckNumber}
+        </Typography>
+      </Grid>
+      <Grid xs={10} item display="flex" justifyContent="center">
+        <Typography component="p" variant="medium" style={{ textAlign: 'center', color: 'black' }}>
+          Bon livrare: {truck.ticketCodeList.join(', ')}
+        </Typography>
+      </Grid>
+      <Grid xs={10} item display="flex" justifyContent="center">
+        <Typography component="p" variant="medium" style={{ textAlign: 'center', color: 'black' }}>
+          Confirm documentele pentru depozit:{' '}
+          {truck.depositDocumentList.map(truck => truck.depositName).join(', ')}
         </Typography>
       </Grid>
 

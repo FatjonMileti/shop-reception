@@ -1,6 +1,6 @@
 import { Button, Input } from '@fullscreendigital/carrefour-dex-fe'
-import React, { useMemo, useState } from "react";
-import { getValidationSchema, initialValues } from './helpers'
+import React, { useMemo, useState } from 'react'
+import { getValidationSchema, initialValues, isEmpty } from './helpers'
 import { useFormik } from 'formik'
 import { useNavigate } from 'react-router-dom'
 import { CircularProgress, Grid, Typography } from '@mui/material'
@@ -9,35 +9,15 @@ import { makeCoreGetRequest, makeCorePostRequest } from 'utils/api'
 import { useMutation, useQuery } from 'react-query'
 import { formatErrorMessage } from 'utils/formatting'
 import { URLS } from 'components/shop-reception/mobile/constants'
+import { TitleHeader } from 'components/shop-reception/mobile/Common/TitleHeader'
+import SourceIcon from '@mui/icons-material/Source'
 
 const RegisterTruck = () => {
-  const navigate = useNavigate();
-  const { showNotification } = useNotification();
-  const [isInvalidTruckNumberModalOpen, setIsInvalidTruckNumberModalOpen] = useState(false);
-  const [InvalidTruckNumberModalContent, setInvalidTruckNumberModalContent] = useState({ title: '', description: '', buttons: [] });
-  let id = 0;
-
-  const { data: hubName, isLoading: isLoadingHubName } = useQuery(
-    ['hub-name'],
-    async () => {
-      const response = await makeCoreGetRequest(`/shop-reception-mobile/home/hub-name`,null)
-      return response || []
-    },
-    {
-      onError: error => {
-        showNotification({
-          message: `A aparut o eroare. ${formatErrorMessage(error)}`,
-          type: 'error'
-        })
-      }
-    }
-  )
+  const navigate = useNavigate()
+  const { showNotification } = useNotification()
 
   const createTruck = async (values: any) => {
-    return await makeCorePostRequest(
-      `/shop-reception-mobile/truck/shop/create-truck`,
-      values
-    )
+    return await makeCorePostRequest(`/shop-reception-mobile/truck/shop/create-truck`, values)
   }
 
   const { isLoading, mutate } = useMutation(createTruck, {
@@ -46,11 +26,11 @@ const RegisterTruck = () => {
         message: `Camionul a fost creat cu success.`,
         type: 'success'
       })
-      navigate(URLS.AUTH_REGISTER_TRUCK_STEP_2, { state: { item: res } })
+      navigate(URLS.AUTH_REGISTER_TRUCK_STEP_2, { state: { truckId: res.id } })
     },
-    onError: res => {
+    onError: error => {
       showNotification({
-        message: `A aparut o eroare ${formatErrorMessage(res)}`,
+        message: `A aparut o eroare ${formatErrorMessage(error)}`,
         type: 'error'
       })
     }
@@ -67,32 +47,14 @@ const RegisterTruck = () => {
     }
   })
 
-  if (isLoadingHubName) {
-    return (
-      <div style={{ display: 'flex' }}>
-        <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
-      </div>
-    )
-  }
-
   const disableNextButton =
-    formik.values.driverName === null ||
-    formik.values.truckNumber === null ||
-    formik.values.driverName.length === 0 ||
-    formik.values.truckNumber.length === 0 ||
-    formik.values.sealList.some(seal => seal.code === null || seal.code.length === 0)
+    isEmpty(formik.values.driverName) ||
+    isEmpty(formik.values.truckNumber) ||
+    formik.values.sealList.some(seal => isEmpty(seal.code))
 
   return (
     <Grid container spacing={2} justifyContent={'center'}>
-      <Typography
-        component="h2"
-        variant="medium"
-        style={{ textAlign: 'center', textTransform: 'uppercase' }}
-        pt={2}
-      >
-        {hubName?.value}
-      </Typography>
-
+      <TitleHeader title="" />
       <Grid xs={10} item>
         <Input
           type="text"
@@ -123,11 +85,11 @@ const RegisterTruck = () => {
           required
         />
       </Grid>
-
       {formik.values.sealList.map((seal, index) => (
         <>
           <Grid xs={10} item>
             <Input
+              id={`seal-${index}`}
               type="text"
               value={seal.code}
               onChange={event =>
@@ -146,11 +108,16 @@ const RegisterTruck = () => {
           </Grid>
 
           <Grid xs={10} item>
-            <Button variant="outlined" label="-" onClick={() => {}} style={{ width: '100%' }} />
+            <Button
+              variant="outlined"
+              children={<SourceIcon />}
+              label=""
+              onClick={() => document.getElementById(`seal-${index}`).focus()}
+              style={{ width: '100%' }}
+            />
           </Grid>
         </>
       ))}
-
       {formik.values.sealList.length < 3 && (
         <Grid xs={10} item>
           <Button
@@ -163,14 +130,13 @@ const RegisterTruck = () => {
           />
         </Grid>
       )}
-
       <Grid xs={10} item>
         <Button
           variant="outlined"
           label="Pasul urmator"
           onClick={() => formik.handleSubmit()}
           style={{ width: '100%' }}
-          disabled={disableNextButton}
+          disabled={disableNextButton || isLoading}
         />
       </Grid>
     </Grid>
