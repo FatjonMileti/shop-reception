@@ -83,7 +83,7 @@ const RegisterTruckStep2 = () => {
           variant="medium"
           style={{ textAlign: 'center', textTransform: 'uppercase', color: 'black' }}
         >
-          {truckBls.truckNumber} / {truckBls.driverName}
+          {truckBls?.truckNumber} / {truckBls?.driverName}
         </Typography>
       </Grid>
 
@@ -93,7 +93,7 @@ const RegisterTruckStep2 = () => {
           variant="medium"
           style={{ textAlign: 'center', textTransform: 'uppercase', color: 'black' }}
         >
-          Sigilii: {truckBls.concatenatedSeals}
+          Sigilii: {truckBls?.concatenatedSeals}
         </Typography>
       </Grid>
 
@@ -102,19 +102,19 @@ const RegisterTruckStep2 = () => {
           variant="outlined"
           label={`Adauga bonuri de livrare`}
           disableClearable
-          options={truckBls.deliveryTicketList.map(deliveryTicket => ({
+          options={truckBls?.deliveryTicketList.map(deliveryTicket => ({
             label: deliveryTicket.depositName,
             value: deliveryTicket.id
           }))}
           onChange={(event, option) => {
-            const hasTicket = formik.values.deliveryTicketList.some(
+            const hasTicket = formik.values?.deliveryTicketList.some(
               ticket => ticket.id === option.value
             )
 
             if (!hasTicket) {
               formik.setFieldValue('deliveryTicketList', [
                 ...formik.values.deliveryTicketList,
-                truckBls.deliveryTicketList.find(ticket => ticket.id === option.value)
+                truckBls?.deliveryTicketList.find(ticket => ticket.id === option.value)
               ])
             }
           }}
@@ -140,7 +140,7 @@ const RegisterTruckStep2 = () => {
                   onClick={() =>
                     formik.setFieldValue(
                       'deliveryTicketList',
-                      formik.values.deliveryTicketList.filter(ticket => ticket.id !== row.id)
+                      formik.values?.deliveryTicketList && formik.values?.deliveryTicketList?.filter(ticket => ticket.id !== row.id)
                     )
                   }
                 >

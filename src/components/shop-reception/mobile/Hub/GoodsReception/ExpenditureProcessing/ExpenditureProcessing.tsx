@@ -40,7 +40,9 @@ const ExpenditureProcessing = () => {
         <TruckCard
           key={index}
           onClick={() => {
-            navigate(`${URLS.AUTH_REGISTER_TRUCK_STEP_2}?id=${item.id}`)
+            navigate(`${URLS.AUTH_REGISTER_TRUCK_STEP_2}?id=${item.id}`, {
+              state: { truckId: item.id }
+            })
           }}
           truck={item}
         />
