@@ -142,7 +142,7 @@ const ExpectedTrucksStep3 = () => {
     initialValues: {
       defect: false,
       reason: null,
-      supportId: scanCodeData?.truckId || null,
+      supportId: scanCodeData?.supportId || null,
       supportTypeId: null
     },
     onSubmit: async (values: any) => {
@@ -299,7 +299,7 @@ const ExpectedTrucksStep3 = () => {
               label="Alte ambalaje"
               onClick={() => {
                 navigate(URLS.AUTH_EXPECTED_TRUCKS_STEP4, {
-                  state: { supportId: scanCodeData?.truckId, truckId: truckId }
+                  state: { supportId: scanCodeData?.supportId, truckId: truckId }
                 })
               }}
               style={{ width: '100%' }}
