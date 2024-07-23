@@ -12,6 +12,7 @@ import { useFormik } from 'formik'
 import { toBoolean } from 'utils/helpers'
 import { FormInfoItems } from 'components/core-ui/FormInfoItems'
 import AlertModal from 'components/shop-reception/mobile/Common/AlertModal/AlertModal'
+import { reasonOptions } from './helpers'
 
 const ExpectedTrucksStep3 = () => {
   const navigate = useNavigate()
@@ -23,6 +24,7 @@ const ExpectedTrucksStep3 = () => {
   const [isSupportImageUploaded, setIsSupportImageUploaded] = useState(false)
   const [isAlertOpen, setIsAlertOpen] = useState(false)
   const [supportType, setSupportType] = useState(null)
+  const [reason, setReason] = useState(null)
 
   const { data: hubName, isLoading: isLoadingHubName } = useQuery(
     ['hub-name'],
@@ -158,6 +160,13 @@ const ExpectedTrucksStep3 = () => {
     }
   }, [typeOptions, formik.values.supportTypeId])
 
+  useEffect(() => {
+    if (formik.values.reason) {
+      const reasonOption = reasonOptions.find(option => formik.values.reason === option.value)
+      setReason(reasonOption)
+    }
+  }, [typeOptions, formik.values.supportTypeId])
+
   if (isLoadingHubName || isCounterLoading || isHubTruckLoading) {
     return (
       <div style={{ display: 'flex' }}>
@@ -223,7 +232,6 @@ const ExpectedTrucksStep3 = () => {
               disableClearable
               options={typeOptions}
               onChange={(event, option) => formik.setFieldValue(`supportTypeId`, option.value)}
-              // value={typeOptions.find(option => formik.values.supportTypeId === option.value)}
               value={supportType}
             />
           </Grid>
@@ -249,13 +257,9 @@ const ExpectedTrucksStep3 = () => {
                   variant="outlined"
                   label="Motiv"
                   disableClearable
-                  options={[
-                    { label: 'Prestator', value: 'PROVIDER' },
-                    { label: 'Transportator', value: 'TRANSPORTER' },
-                    { label: 'Sef depozit', value: 'SHOP' }
-                  ]}
+                  options={reasonOptions}
                   onChange={(event, option) => formik.setFieldValue('reason', option.value)}
-                  value={formik.values.reason}
+                  value={reason}
                 />
               </Grid>
               <Grid xs={10} item>
