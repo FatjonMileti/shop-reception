@@ -13,7 +13,7 @@ import {
   getHubOptions,
   getParentSocietyOptions,
   getShopOptions,
-  getSupportTypeOptions
+  getSupportTypeOptionsById
 } from '../../api'
 import { EditBalancePackage } from './EditBalancePackage'
 import { History } from '@mui/icons-material'
@@ -34,7 +34,7 @@ const BalancePackages = () => {
 
   const { data: shopOptions } = getShopOptions(showNotification)
   const { data: hubOptions } = getHubOptions(showNotification)
-  const { data: supportTypeOptions } = getSupportTypeOptions(showNotification)
+  const { data: supportTypeOptions } = getSupportTypeOptionsById(showNotification)
   const { data: parentSocietyOptions } = getParentSocietyOptions(showNotification)
 
   const filters = useMemo(

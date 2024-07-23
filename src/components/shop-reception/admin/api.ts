@@ -117,6 +117,30 @@ export const getSupportTypeOptions = (
   )
 }
 
+export const getSupportTypeOptionsById = (
+  showNotification: Function,
+  validateQuery: boolean = true
+) => {
+  return useQuery(
+    ['support-types-by-id'],
+    async () => {
+      const data = await makeCoreGetRequest('/shop-reception/support-flows/support-types')
+      return data.map(item => ({
+        label: item.name,
+        value: item.id
+      }))
+    },
+    {
+      onError: error =>
+        handleQueryError(
+          error,
+          'A aparut o eroare la obtinerea tipurilor de suport.',
+          showNotification
+        )
+    }
+  )
+}
+
 export const getParentSocietyOptions = (
   showNotification: Function,
   validateQuery: boolean = true
