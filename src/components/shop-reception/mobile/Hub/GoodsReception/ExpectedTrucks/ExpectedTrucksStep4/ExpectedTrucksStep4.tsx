@@ -136,7 +136,7 @@ const ExpectedTrucksStep4 = () => {
                     <Input
                       type="number"
                       variant="outlined"
-                      width="50px"
+                      width="70px"
                       value={type.conform}
                       onChange={event =>
                         formik.setFieldValue(
@@ -150,7 +150,7 @@ const ExpectedTrucksStep4 = () => {
                     <Input
                       type="number"
                       variant="outlined"
-                      width="50px"
+                      width="70px"
                       value={type.defect}
                       onChange={event =>
                         formik.setFieldValue(
