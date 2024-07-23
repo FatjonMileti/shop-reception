@@ -27,21 +27,6 @@ const RegisterTruckStep2 = () => {
       )
       return response || []
 
-      // const data = {
-      //   ...response,
-      //   deliveryTicketList: [
-      //     {
-      //       id: 0,
-      //       externalTicketId: 'string',
-      //       depositName: 'string',
-      //       externalTicketIdDepositName: 'string',
-      //       transportCode: 'string',
-      //       date: '2024-07-22'
-      //     }
-      //   ]
-      // }
-
-      // return data
     },
     {
       onError: error => {
