@@ -94,7 +94,7 @@ const ExpectedDepositReturnsStep1 = () => {
           <Grid xs={8} item>
             <Autocomplete
               variant="outlined"
-              label={`Confirma sigiliu ${seal.id}`}
+              label={`Confirma sigiliu ${seal.sealCode}`}
               disableClearable
               options={[
                 { label: 'Da', value: 'true' },
