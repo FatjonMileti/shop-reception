@@ -6,7 +6,7 @@ import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { URLS } from 'components/shop-reception/mobile/constants'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import ImageUpload from 'components/shop-reception/mobile/Common/ImageUpload/ImageUpload'
 import { useFormik } from 'formik'
 import { toBoolean } from 'utils/helpers'
@@ -22,6 +22,7 @@ const ExpectedTrucksStep3 = () => {
   const [supportCode, setSupportCode] = useState(null)
   const [isSupportImageUploaded, setIsSupportImageUploaded] = useState(false)
   const [isAlertOpen, setIsAlertOpen] = useState(false)
+  const [supportType, setSupportType] = useState(null)
 
   const { data: hubName, isLoading: isLoadingHubName } = useQuery(
     ['hub-name'],
@@ -140,15 +141,22 @@ const ExpectedTrucksStep3 = () => {
     enableReinitialize: true,
     validateOnChange: false,
     initialValues: {
-      defect: false,
-      reason: null,
+      defect: scanCodeData?.defect,
+      reason: scanCodeData?.reason,
       supportId: scanCodeData?.truckId || null,
-      supportTypeId: null
+      supportTypeId: scanCodeData?.supportTypeId
     },
     onSubmit: async (values: any) => {
       mutate(values)
     }
   })
+
+  useEffect(() => {
+    if (typeOptions && formik.values.supportTypeId) {
+      const supportTypeOption = typeOptions.find(option => formik.values.supportTypeId === option.value)
+      setSupportType(supportTypeOption)
+    }
+  }, [typeOptions, formik.values.supportTypeId])
 
   if (isLoadingHubName || isCounterLoading || isHubTruckLoading) {
     return (
@@ -211,24 +219,26 @@ const ExpectedTrucksStep3 = () => {
           <Grid xs={10} item>
             <Autocomplete
               variant="outlined"
-              label={`Tip ambalaj`}
+              label="Tip ambalaj"
               disableClearable
               options={typeOptions}
               onChange={(event, option) => formik.setFieldValue(`supportTypeId`, option.value)}
-              defaultValue={null}
+              // value={typeOptions.find(option => formik.values.supportTypeId === option.value)}
+              value={supportType}
             />
           </Grid>
 
           <Grid xs={10} item>
             <Autocomplete
               variant="outlined"
-              label={`Calitativ`}
+              label="Calitativ"
               disableClearable
               options={[
                 { label: 'Da', value: 'true' },
                 { label: 'Nu', value: 'false' }
               ]}
               onChange={(event, option) => formik.setFieldValue('defect', !toBoolean(option.value))}
+              value={formik.values.defect ? { label: 'Nu', value: 'false' } : { label: 'Da', value: 'true' }}
             />
           </Grid>
 
@@ -237,7 +247,7 @@ const ExpectedTrucksStep3 = () => {
               <Grid xs={10} item>
                 <Autocomplete
                   variant="outlined"
-                  label={`Motiv`}
+                  label="Motiv"
                   disableClearable
                   options={[
                     { label: 'Prestator', value: 'PROVIDER' },
@@ -245,12 +255,13 @@ const ExpectedTrucksStep3 = () => {
                     { label: 'Sef depozit', value: 'SHOP' }
                   ]}
                   onChange={(event, option) => formik.setFieldValue('reason', option.value)}
+                  value={formik.values.reason}
                 />
               </Grid>
               <Grid xs={10} item>
                 <Autocomplete
                   variant="outlined"
-                  label={`Marca`}
+                  label="Marca"
                   disableClearable
                   options={[
                     { label: 'Legume fructe', value: 'VEGETABLES_FRUITS' },
@@ -267,24 +278,26 @@ const ExpectedTrucksStep3 = () => {
                     { label: 'VOL', value: 'VOLUME' }
                   ]}
                   onChange={(event, option) =>
-                    formik.setFieldValue('defect', !toBoolean(option.value))
+                    formik.setFieldValue('nonCompliantReasonList', option.value)
                   }
+                  value={formik.values.nonCompliantReasonList}
+                  multiple
                 />
               </Grid>
 
               <Grid xs={10} item>
                 <ImageUpload
-                  uploadUrl={`/shop-reception-mobile/support/shop/upload/${scanCodeData.truckId}`}
+                  uploadUrl={`/shop-reception-mobile/support/shop/upload/${counter.truckId}`}
                   onSuccess={() => {
                     showNotification({
-                      message: `Imaginea a fost incarcata cu succes.`,
+                      message: "Imaginea a fost incarcata cu succes.",
                       type: 'success'
                     })
                     setIsSupportImageUploaded(true)
                   }}
                   onError={() =>
                     showNotification({
-                      message: `A aparut o eroare la incarcarea imaginii.`,
+                      message: "A aparut o eroare la incarcarea imaginii.",
                       type: 'error'
                     })
                   }
@@ -324,7 +337,7 @@ const ExpectedTrucksStep3 = () => {
         <FormInfoItems
           items={[
             { label: 'Numar camion:', name: counter?.truckNumber },
-            { label: 'Numar suporti scanati:', name: counter?.counter }
+            { label: 'Numar suporti scanati:', name: `${counter?.counter}` }
           ]}
         />
       </Grid>
