@@ -287,7 +287,7 @@ const ExpectedTrucksStep3 = () => {
 
               <Grid xs={10} item>
                 <ImageUpload
-                  uploadUrl={`/shop-reception-mobile/support/shop/upload/${counter.truckId}`}
+                  uploadUrl={`/shop-reception-mobile/support/shop/upload/${scanCodeData?.supportId}`}
                   onSuccess={() => {
                     showNotification({
                       message: "Imaginea a fost incarcata cu succes.",
