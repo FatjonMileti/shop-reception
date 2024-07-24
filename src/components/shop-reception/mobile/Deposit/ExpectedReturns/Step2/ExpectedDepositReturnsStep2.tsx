@@ -7,7 +7,8 @@ import {
   TableBody,
   TableCell,
   TableHead,
-  TableRow
+  TableRow,
+  Typography
 } from '@mui/material'
 import { formatErrorMessage } from 'utils/formatting'
 import { useNotification } from 'hooks'
@@ -95,6 +96,29 @@ const ExpectedDepositReturnsStep2 = () => {
 
   return (
     <Grid container spacing={2} justifyContent={'center'}>
+      <Grid xs={10} item justifyContent="center">
+        <Typography
+          component="p"
+          variant="medium"
+          style={{ textAlign: 'center', color: 'black', marginBottom: '12px' }}
+        >
+          {stackList?.truckNumber} / {stackList?.driverName}
+        </Typography>
+        <Typography
+          component="p"
+          variant="medium"
+          style={{ textAlign: 'center', color: 'black', marginBottom: '12px' }}
+        >
+          {stackList?.shopNamesAndCodes}
+        </Typography>
+        <Typography
+          component="p"
+          variant="medium"
+          style={{ textAlign: 'center', color: 'black', marginBottom: '12px' }}
+        >
+          Descarcare stive
+        </Typography>
+      </Grid>
       <Grid xs={10} item>
         <Table>
           <TableHead style={{ backgroundColor: '#0970E6' }}>
