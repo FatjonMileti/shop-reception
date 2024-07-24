@@ -169,8 +169,8 @@ const DeliveryCompleteScanStep2 = () => {
           quantity: values.quantity,
           shortDlc: values.shortDlc,
           dlc: submitDlc,
-          defectReason: defectReason.value,
-          mark: mark.value,
+          defectReason: defectReason?.value || null,
+          mark: mark?.value || null,
           shopReceptionDeviation: values.shopReceptionDeviation,
           supportId: data.supportId
         }
