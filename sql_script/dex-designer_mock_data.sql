@@ -309,7 +309,7 @@ VALUES
     (248, 'Serie Numar-Aviz', '', '/shop-reception/admin/noticeSeriesNumberList', true, 248, true),
     -- "Receptie marfa" section
     (179, 'Bonuri de livrare', '', '/shop-reception/reception/deliveryTicket', true, 163, true),
-    (222, 'Bonuri de livrare', '', '/shop-reception/reception/deliverySupportAction/:id', true, 163, false),
+    (222, 'Istoric suport', '', '/shop-reception/reception/deliverySupportAction/:id', true, 163, false),
     (218, 'Bonuri de livrare', '', '/shop-reception/reception/deliveryTicket/:id', true, 163, false),
     (180, 'Lista camioane marfa', '', '/shop-reception/reception/truckList', true, 164, true),
     (291, 'Detalii lista camioane marfa', '', '/shop-reception/reception/truckList/:id', true, 164, false),

@@ -42,8 +42,6 @@ const PackagingInventory = () => {
     [shopOptions, hubOptions, supportTypeOptions, parentSocietyOptions]
   )
 
-  const columns = useMemo(() => getColumns(downloadImage), [])
-
   const downloadImage = async id => {
     try {
       const response = await makeCoreGetFileRequest(`/shop-reception/pictures/export/${id}`, {
@@ -57,6 +55,8 @@ const PackagingInventory = () => {
       })
     }
   }
+
+  const columns = useMemo(() => getColumns(downloadImage), [])
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
