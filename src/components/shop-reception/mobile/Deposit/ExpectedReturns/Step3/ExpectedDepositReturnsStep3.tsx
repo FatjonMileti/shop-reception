@@ -116,14 +116,14 @@ const ExpectedDepositReturnsStep3 = () => {
           variant="medium"
           style={{ textAlign: 'center', color: 'black', marginBottom: '12px' }}
         >
-          {supportList.truckNumber} / {supportList.driverName}
+          {supportList?.truckNumber} / {supportList?.driverName}
         </Typography>
         <Typography
           component="p"
           variant="medium"
           style={{ textAlign: 'center', color: 'black', marginBottom: '12px' }}
         >
-          {supportList.shopNamesAndCodes} - numar aviz {supportList.noticeNumber}
+          {supportList?.shopNamesAndCodes} - numar aviz {supportList?.noticeNumber}
         </Typography>
         <Typography
           component="p"
