@@ -18,9 +18,7 @@ const DeliverySensitiveProducts = () => {
   const { data: supports, isLoading } = useQuery(
     ['supports-truckId'],
     async () => {
-      const result = await makeCoreGetRequest(
-        `/shop-reception-mobile/sensitive/supports/${truckId}`
-      )
+      const result = await makeCoreGetRequest(`/shop-reception-mobile/sensitive/supports/${truckId}`, null)
 
       return result || []
     },
@@ -59,26 +57,16 @@ const DeliverySensitiveProducts = () => {
       </Grid>
 
       {supports.map(support => (
-        <Grid
-          item
-          xs={10}
-          mb={2}
+        <Grid item xs={10} mb={2}
           onClick={() =>
             support.sensitiveProducts === true
-              ? navigate(URLS.AUTH_DELIVERY_SENSITIVE_PRODUCTS_CONFIRM, {
-                  state: { truck, support }
-                })
-              : navigate(URLS.AUTH_DELIVERY_SHORT_DLC_PRODUCTS, {
-                  state: { truck, support }
-                })
+              ? navigate(URLS.AUTH_DELIVERY_SENSITIVE_PRODUCTS_CONFIRM, { state: { truckId, support } })
+              : navigate(URLS.AUTH_DELIVERY_SHORT_DLC_PRODUCTS, { state: { truckId, support } })
           }
         >
           <Paper elevation={3} style={{ padding: '20px' }} onClick={() => {}}>
-            <Typography variant="medium" component="h5">
-              Eticheta suport:
-            </Typography>
             <Typography variant="medium" component="p">
-              {support?.supportCode}
+              Eticheta suport: {support?.supportCode}
             </Typography>
             <Typography variant="medium" component="p">
               Numar suport: {support?.supportNumber}

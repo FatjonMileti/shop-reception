@@ -46,10 +46,7 @@ const ExpectedDepositReturnsStep2 = () => {
   )
 
   const confirmStackList = async (values: any) => {
-    await makeCorePostRequest(
-      `/shop-reception-mobile/truck/deposit/return/confirm-stacks`,
-      values
-    )
+    await makeCorePostRequest(`/shop-reception-mobile/truck/deposit/return/confirm-stacks`, values)
   }
 
   const { isLoading, mutate } = useMutation(confirmStackList, {
@@ -58,7 +55,9 @@ const ExpectedDepositReturnsStep2 = () => {
         message: `Confirmat`,
         type: 'success'
       })
-      navigate(URLS.AUTH_DEPOSIT_EXPECTED_RETURNS_STEP_3, { state: { item: item } })
+      navigate(URLS.AUTH_DEPOSIT_EXPECTED_RETURNS_STEP_3, {
+        state: { item: item, nextTruckId: stackList.nextTruckId }
+      })
     },
     onError: res => {
       showNotification({
