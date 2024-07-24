@@ -16,7 +16,7 @@ import { Button, Input } from '@fullscreendigital/carrefour-dex-fe'
 import { URLS } from 'components/shop-reception/mobile/constants'
 import { makeCoreGetRequest, makeCorePostRequest } from 'utils/api'
 import { useFormik } from 'formik'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import AlertModal from 'components/shop-reception/mobile/Common/AlertModal/AlertModal'
 
 const ExpectedDepositReturnsStep2 = () => {
@@ -85,6 +85,14 @@ const ExpectedDepositReturnsStep2 = () => {
       mutate(payload)
     }
   })
+
+  const isSubmitButtonDisabled = useMemo(
+    () =>
+      formik.values?.stackList?.some(
+        stackItem => !stackItem.confirmedStackNumber || +stackItem.confirmedStackNumber === 0
+      ),
+    [formik.values?.stackList]
+  )
 
   if (isLoadingStackList && typeof formik.values === 'undefined') {
     return (
@@ -172,6 +180,7 @@ const ExpectedDepositReturnsStep2 = () => {
             showAlert ? setIsAlertOpen(true) : formik.handleSubmit()
           }}
           style={{ width: '100%' }}
+          disabled={isSubmitButtonDisabled || isLoading}
         />
       </Grid>
       <AlertModal
