@@ -46,10 +46,7 @@ const ExpectedDepositReturnsStep1 = () => {
       truckId: notice.truckId
     }))
 
-    await makeCorePostRequest(
-      `/shop-reception-mobile/truck/deposit/return/verify-notices`,
-      payload
-    )
+    await makeCorePostRequest(`/shop-reception-mobile/truck/deposit/return/verify-notices`, payload)
     await makeCorePostRequest(`/shop-reception-mobile/truck/deposit/return/confirm-truck`, values)
   }
 
@@ -136,7 +133,9 @@ const ExpectedDepositReturnsStep1 = () => {
           <Grid xs={8} item>
             <Autocomplete
               variant="outlined"
-              label={`Aviz ${notice.shopName} ${notice.noticeNumber}`}
+              label={`Aviz ${notice.shopName || ''} ${notice.hubName || ''} ${
+                notice.noticeNumber || ''
+              }`}
               disableClearable
               options={[
                 { label: 'Da', value: 'true' },

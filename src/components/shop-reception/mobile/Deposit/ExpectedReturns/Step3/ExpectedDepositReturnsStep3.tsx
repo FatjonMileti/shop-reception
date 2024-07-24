@@ -123,7 +123,7 @@ const ExpectedDepositReturnsStep3 = () => {
           variant="medium"
           style={{ textAlign: 'center', color: 'black', marginBottom: '12px' }}
         >
-          {supportList?.shopNamesAndCodes} - numar aviz {supportList?.noticeNumber}
+          {supportList?.shopNameAndCode} - numar aviz {supportList?.noticeNumber}
         </Typography>
         <Typography
           component="p"
