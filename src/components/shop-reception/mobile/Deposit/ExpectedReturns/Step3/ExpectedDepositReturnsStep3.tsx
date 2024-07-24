@@ -28,6 +28,7 @@ const ExpectedDepositReturnsStep3 = () => {
   const [isAlertOpen, setIsAlertOpen] = useState(false)
   const [supportWithDifference, setSupportWithDifference] = useState([])
   const [uploadedImages, setUploadedImages] = useState(0)
+  const [packageValue, setPackageValue] = useState(null)
 
   const { data: supportList, isLoading: isLoadingSupportList } = useQuery(
     ['support-list-table'],
@@ -161,11 +162,10 @@ const ExpectedDepositReturnsStep3 = () => {
         </Table>
       </Grid>
 
-      <Grid xs={10} item>
+      <Grid xs={10} item style={{ margin: '24px 0' }}>
         <Autocomplete
           variant="outlined"
           label="Adauga ambalaj"
-          disableClearable
           options={
             allSupportList?.map(item => ({ label: item.supportTypeNameAndCode, value: item })) || []
           }
@@ -173,7 +173,10 @@ const ExpectedDepositReturnsStep3 = () => {
             const isExistent = formik.values?.supportList?.some(item => item.id === option.value.id)
             !isExistent &&
               formik.setFieldValue('supportList', [...formik.values.supportList, option.value])
+            setPackageValue(null)
           }}
+          value={packageValue}
+          blurOnSelect
         />
       </Grid>
 
