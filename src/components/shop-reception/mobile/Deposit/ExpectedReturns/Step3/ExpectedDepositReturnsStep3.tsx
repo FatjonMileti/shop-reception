@@ -7,7 +7,8 @@ import {
   TableBody,
   TableCell,
   TableHead,
-  TableRow
+  TableRow,
+  Typography
 } from '@mui/material'
 import { formatErrorMessage } from 'utils/formatting'
 import { useNotification } from 'hooks'
@@ -23,7 +24,7 @@ const ExpectedDepositReturnsStep3 = () => {
   const location = useLocation()
   const navigate = useNavigate()
   const { showNotification } = useNotification()
-  const item = location.state.item
+  const { item, nextTruckId } = location.state
 
   const [isAlertOpen, setIsAlertOpen] = useState(false)
   const [supportWithDifference, setSupportWithDifference] = useState([])
@@ -34,7 +35,7 @@ const ExpectedDepositReturnsStep3 = () => {
     ['support-list-table'],
     async () => {
       const response = await makeCoreGetRequest(
-        `/shop-reception-mobile/truck/deposit/return/supports/${item.id}?parentId=${item.id}`
+        `/shop-reception-mobile/truck/deposit/return/supports/${nextTruckId}?parentId=${item.id}`
       )
       return response || []
     },
@@ -109,9 +110,32 @@ const ExpectedDepositReturnsStep3 = () => {
 
   return (
     <Grid container spacing={0} justifyContent={'center'}>
+      <Grid xs={10} item justifyContent="center">
+        <Typography
+          component="p"
+          variant="medium"
+          style={{ textAlign: 'center', color: 'black', marginBottom: '12px' }}
+        >
+          {supportList.truckNumber} / {supportList.driverName}
+        </Typography>
+        <Typography
+          component="p"
+          variant="medium"
+          style={{ textAlign: 'center', color: 'black', marginBottom: '12px' }}
+        >
+          {supportList.shopNamesAndCodes} - numar aviz {supportList.noticeNumber}
+        </Typography>
+        <Typography
+          component="p"
+          variant="medium"
+          style={{ textAlign: 'center', color: 'black', marginBottom: '12px' }}
+        >
+          Receptie retur
+        </Typography>
+      </Grid>
       <Grid xs={10} item>
         <Table>
-          <TableHead style={{ backgroundColor: '#0970E6' }}>
+          <TableHead>
             <TableRow>
               <TableCell></TableCell>
               <TableCell></TableCell>
@@ -183,7 +207,7 @@ const ExpectedDepositReturnsStep3 = () => {
       <Grid xs={10} item>
         <Button
           variant="contained"
-          label="Pasul urmator"
+          label="Sumar camion"
           onClick={() => {
             let list = []
             const alerts = formik.values?.supportList?.map(supportItem => {

@@ -26,57 +26,7 @@ const ExpectedTrucksStep2 = () => {
     async () => {
       const response = await makeCoreGetRequest(`/shop-reception-mobile/truck/hub/${item.value}`)
 
-      // return response
-
-      return {
-        id: 0,
-        depositId: 0,
-        depositName: 'string',
-        depositDocumentList: [
-          {
-            depositId: 0,
-            depositName: 'string',
-            hasNotice: true,
-            hasTransportNote: true
-          }
-        ],
-        status: 'string',
-        hubId: 0,
-        hubName: 'string',
-        hubCode: 'string',
-        shopCode: 'string',
-        shopName: 'string',
-        truckNumber: 'string',
-        transportCode: 'string',
-        shopTemperature: 0,
-        registeredDate: 'string',
-        createdBy: 'string',
-        ticketCodeList: ['string', 'string2'],
-        sealList: [
-          {
-            id: 0,
-            code: 'string',
-            type: 'string',
-            broken: true,
-            userMessage: 'string'
-          }
-        ],
-        supportList: [
-          {
-            id: 0,
-            supportCode: 'string',
-            supportNumber: 'string',
-            ticketNumber: 'string',
-            truckNumber: 'string',
-            driverName: 'string',
-            arrivalDate: 'string',
-            sensitiveProducts: true,
-            shortDlcProducts: true,
-            sgrProducts: true
-          }
-        ],
-        flowType: 'IN_HUB'
-      }
+      return response
     },
     {
       onError: error => {
