@@ -24,7 +24,7 @@ const ExpectedDepositReturnsStep3 = () => {
   const location = useLocation()
   const navigate = useNavigate()
   const { showNotification } = useNotification()
-  const { item, nextTruckId } = location.state
+  const { item, nextTruckId, tuckId } = location.state
 
   const [isAlertOpen, setIsAlertOpen] = useState(false)
   const [supportWithDifference, setSupportWithDifference] = useState([])
@@ -35,7 +35,7 @@ const ExpectedDepositReturnsStep3 = () => {
     ['support-list-table'],
     async () => {
       const response = await makeCoreGetRequest(
-        `/shop-reception-mobile/truck/deposit/return/supports/${nextTruckId}?parentId=${item.id}`
+        `/shop-reception-mobile/truck/deposit/return/supports/${nextTruckId}?parentId=${tuckId}`
       )
       return response || []
     },

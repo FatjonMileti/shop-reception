@@ -57,7 +57,7 @@ const ExpectedDepositReturnsStep2 = () => {
         type: 'success'
       })
       navigate(URLS.AUTH_DEPOSIT_EXPECTED_RETURNS_STEP_3, {
-        state: { item: item, nextTruckId: stackList.nextTruckId }
+        state: { item: item, nextTruckId: stackList.nextTruckId, tuckId: stackList.id }
       })
     },
     onError: res => {
