@@ -103,6 +103,11 @@ const SupportScanStep2 = () => {
     }
   })
 
+  const isSubmitButtonDisabled = useMemo(
+    () => formik.values.supportType.some(support => support.received && !support.imageUploaded),
+    [formik.values.supportType]
+  )
+
   const handleError = error => {
     showNotification({
       message: `${formatErrorMessage(error)}`,
@@ -498,6 +503,7 @@ const SupportScanStep2 = () => {
           variant="contained"
           label="Confirma ambalaje"
           onClick={() => formik.handleSubmit()}
+          disabled={isSubmitButtonDisabled || formik.isSubmitting}
         />,
         <AlertModal
           open={isMissingValuesModalOpen}

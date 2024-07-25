@@ -145,7 +145,7 @@ const ExpectedTrucksStep3 = () => {
     initialValues: {
       defect: scanCodeData?.defect,
       reason: scanCodeData?.reason,
-      supportId: scanCodeData?.supportId || null,
+      supportId: scanCodeData?.supportId,
       supportTypeId: scanCodeData?.supportTypeId
     },
     onSubmit: async (values: any) => {

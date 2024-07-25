@@ -62,6 +62,7 @@ import { ExpectedTrucksStep6 } from './Hub/GoodsReception/ExpectedTrucks/Expecte
 import DeliveryRandomProductModifica
   from "./Shop/GoodsReception/Delivery/DeliveryDetail/DeliveryRandomProduct/DeliveryRandomProductConfirm/DeliveryRandomProductModifica";
 import { DeliveryShortDLC } from './Shop/GoodsReception/Delivery/DeliveryDetail/DeliveryShortDLC'
+import { InProcessReceptionTrucks } from "./Hub/GoodsReception/InProcessReceptionTrucks";
 
 export const useMerchandiseRoutes = applicationPages => {
   return (
@@ -132,6 +133,16 @@ export const useMerchandiseRoutes = applicationPages => {
         element={
           <PrivateRoute
             component={ExpectedTrucksStep6}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_IN_PROCESS_TRUCKS}
+        element={
+          <PrivateRoute
+            component={InProcessReceptionTrucks}
             applicationPages={applicationPages}
             checkIsAuthorized
           />

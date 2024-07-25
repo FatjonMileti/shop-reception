@@ -1,10 +1,19 @@
-import { useLocation, useNavigate } from "react-router-dom";
-import { useMutation, useQuery } from "react-query";
-import { CircularProgress, Grid, Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material";
-import { formatErrorMessage } from "utils/formatting";
-import { useNotification } from "hooks";
-import { Button } from "@fullscreendigital/carrefour-dex-fe";
-import { makeCoreGetRequest, makeCorePostRequest } from "utils/api";
+import { useLocation, useNavigate } from 'react-router-dom'
+import { useMutation, useQuery } from 'react-query'
+import {
+  CircularProgress,
+  Grid,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+  Typography
+} from '@mui/material'
+import { formatErrorMessage } from 'utils/formatting'
+import { useNotification } from 'hooks'
+import { Button } from '@fullscreendigital/carrefour-dex-fe'
+import { makeCoreGetRequest, makeCorePostRequest } from 'utils/api'
 
 const ExpectedDepositReturnsStep4 = () => {
   const location = useLocation()
@@ -61,6 +70,22 @@ const ExpectedDepositReturnsStep4 = () => {
 
   return (
     <Grid container spacing={0} justifyContent={'center'}>
+      <Grid xs={10} item justifyContent="center">
+        <Typography
+          component="p"
+          variant="medium"
+          style={{ textAlign: 'center', color: 'black', marginBottom: '12px' }}
+        >
+          {data?.truckNumber} / {data?.driverName}
+        </Typography>
+        <Typography
+          component="p"
+          variant="medium"
+          style={{ textAlign: 'center', color: 'black', marginBottom: '12px' }}
+        >
+          {data?.shopNamesAndCodes}
+        </Typography>
+      </Grid>
       <Grid xs={10} item>
         <Table>
           <TableHead style={{ backgroundColor: '#0970E6' }}>

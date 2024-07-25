@@ -43,7 +43,8 @@ export const URLS = {
   AUTH_CONTINUE_RETURN_TRUCKS: '/shop-reception/mobile/inProgressReturns', // In progress return trucks
 
   // HUB Goods Reception
-  AUTH_EXPECTED_TRUCKS: '/shop-reception/mobile/expectedTrucks', // List of trucks waiting reception at the hub
+  AUTH_EXPECTED_TRUCKS: '/shop-reception/mobile/expectedTrucks',
+  AUTH_IN_PROCESS_TRUCKS: '/shop-reception/mobile/inProcessTrucks',// List of trucks waiting reception at the hub
   AUTH_PROCESSING_SHIPMENT: '/shop-reception/mobile/inProcessingShipment', // List of trucks in processing at hub reception
   AUTH_EXPECTED_TRUCKS_STEP2: '/shop-reception/mobile/expectedTrucks-step-2',
   AUTH_EXPECTED_TRUCKS_STEP3: '/shop-reception/mobile/expectedTrucks-step-3',

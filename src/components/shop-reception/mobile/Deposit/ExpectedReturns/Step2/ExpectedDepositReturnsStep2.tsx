@@ -7,7 +7,8 @@ import {
   TableBody,
   TableCell,
   TableHead,
-  TableRow
+  TableRow,
+  Typography
 } from '@mui/material'
 import { formatErrorMessage } from 'utils/formatting'
 import { useNotification } from 'hooks'
@@ -15,7 +16,7 @@ import { Button, Input } from '@fullscreendigital/carrefour-dex-fe'
 import { URLS } from 'components/shop-reception/mobile/constants'
 import { makeCoreGetRequest, makeCorePostRequest } from 'utils/api'
 import { useFormik } from 'formik'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import AlertModal from 'components/shop-reception/mobile/Common/AlertModal/AlertModal'
 
 const ExpectedDepositReturnsStep2 = () => {
@@ -56,7 +57,7 @@ const ExpectedDepositReturnsStep2 = () => {
         type: 'success'
       })
       navigate(URLS.AUTH_DEPOSIT_EXPECTED_RETURNS_STEP_3, {
-        state: { item: item, nextTruckId: stackList.nextTruckId }
+        state: { item: item, nextTruckId: stackList.nextTruckId, tuckId: stackList.id }
       })
     },
     onError: res => {
@@ -85,6 +86,14 @@ const ExpectedDepositReturnsStep2 = () => {
     }
   })
 
+  const isSubmitButtonDisabled = useMemo(
+    () =>
+      formik.values?.stackList?.some(
+        stackItem => !stackItem.confirmedStackNumber || +stackItem.confirmedStackNumber === 0
+      ),
+    [formik.values?.stackList]
+  )
+
   if (isLoadingStackList && typeof formik.values === 'undefined') {
     return (
       <div style={{ display: 'flex' }}>
@@ -95,6 +104,29 @@ const ExpectedDepositReturnsStep2 = () => {
 
   return (
     <Grid container spacing={2} justifyContent={'center'}>
+      <Grid xs={10} item justifyContent="center">
+        <Typography
+          component="p"
+          variant="medium"
+          style={{ textAlign: 'center', color: 'black', marginBottom: '12px' }}
+        >
+          {stackList?.truckNumber} / {stackList?.driverName}
+        </Typography>
+        <Typography
+          component="p"
+          variant="medium"
+          style={{ textAlign: 'center', color: 'black', marginBottom: '12px' }}
+        >
+          {stackList?.shopNamesAndCodes}
+        </Typography>
+        <Typography
+          component="p"
+          variant="medium"
+          style={{ textAlign: 'center', color: 'black', marginBottom: '12px' }}
+        >
+          Descarcare stive
+        </Typography>
+      </Grid>
       <Grid xs={10} item>
         <Table>
           <TableHead style={{ backgroundColor: '#0970E6' }}>
@@ -148,6 +180,7 @@ const ExpectedDepositReturnsStep2 = () => {
             showAlert ? setIsAlertOpen(true) : formik.handleSubmit()
           }}
           style={{ width: '100%' }}
+          disabled={isSubmitButtonDisabled || isLoading}
         />
       </Grid>
       <AlertModal

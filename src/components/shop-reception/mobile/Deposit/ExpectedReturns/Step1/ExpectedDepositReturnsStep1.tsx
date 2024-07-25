@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useMutation, useQuery } from 'react-query'
-import { CircularProgress, Grid } from '@mui/material'
+import { CircularProgress, Grid, Typography } from '@mui/material'
 import { formatErrorMessage } from 'utils/formatting'
 import { useNotification } from 'hooks'
 import { Autocomplete, Button, Input } from '@fullscreendigital/carrefour-dex-fe'
@@ -46,10 +46,7 @@ const ExpectedDepositReturnsStep1 = () => {
       truckId: notice.truckId
     }))
 
-    await makeCorePostRequest(
-      `/shop-reception-mobile/truck/deposit/return/verify-notices`,
-      payload
-    )
+    await makeCorePostRequest(`/shop-reception-mobile/truck/deposit/return/verify-notices`, payload)
     await makeCorePostRequest(`/shop-reception-mobile/truck/deposit/return/confirm-truck`, values)
   }
 
@@ -89,6 +86,22 @@ const ExpectedDepositReturnsStep1 = () => {
 
   return (
     <Grid container spacing={2} justifyContent={'center'}>
+      <Grid xs={10} item justifyContent="center">
+        <Typography
+          component="p"
+          variant="medium"
+          style={{ textAlign: 'center', color: 'black', marginBottom: '12px' }}
+        >
+          {data?.truckNumber} / {data?.driverName}
+        </Typography>
+        <Typography
+          component="p"
+          variant="medium"
+          style={{ textAlign: 'center', color: 'black', marginBottom: '12px' }}
+        >
+          {data?.shopNamesAndCodes}
+        </Typography>
+      </Grid>
       {formik.values?.sealList.map((seal, index) => (
         <>
           <Grid xs={8} item>
@@ -134,59 +147,18 @@ const ExpectedDepositReturnsStep1 = () => {
       {formik.values?.noticeList.map((notice, index) => (
         <>
           <Grid xs={8} item>
-            <Autocomplete
+            <Input
               variant="outlined"
-              label={`Aviz ${notice.shopName} ${notice.noticeNumber}`}
-              disableClearable
-              options={[
-                { label: 'Da', value: 'true' },
-                { label: 'Nu', value: 'false' }
-              ]}
-              onChange={(event, option) =>
-                formik.setFieldValue(`noticeList[${index}].correct`, toBoolean(option.value))
-              }
-              defaultValue={
-                notice.correct ? { label: 'Da', value: 'true' } : { label: 'Nu', value: 'false' }
-              }
+              label="Numar aviz"
+              value={`Aviz ${notice.shopName || ''} ${notice.hubName || ''} ${
+                notice.noticeNumber || ''
+              }`}
+              type="text"
+              disabled
+              fullWidth
             />
           </Grid>
-
-          <Grid xs={2} item display="flex" justifyContent={'center'} alignItems={'center'}>
-            <ImageUpload
-              uploadUrl={`/shop-reception-mobile/truck/deposit/return/upload/return_truck_deposit_notice/${truck?.id}`}
-              onSuccess={() => {
-                showNotification({
-                  message: `Imaginea a fost incarcata cu succes.`,
-                  type: 'success'
-                })
-                setUploadedImages(prev => prev + 1)
-              }}
-              onError={() =>
-                showNotification({
-                  message: `A aparut o eroare la incarcarea imaginii.`,
-                  type: 'error'
-                })
-              }
-            />
-          </Grid>
-
-          {!notice.correct && (
-            <Grid xs={10} item>
-              <Input
-                type="text"
-                label={`Numar corect aviz ${notice.shopName}`}
-                variant="outlined"
-                value={notice.correctNoticeNumber || ''}
-                onChange={event =>
-                  formik.setFieldValue(
-                    `noticeList[${index}].correctNoticeNumber`,
-                    (event.target as HTMLInputElement).value
-                  )
-                }
-                width="100%"
-              />
-            </Grid>
-          )}
+          <Grid xs={2} item></Grid>
         </>
       ))}
 
@@ -198,9 +170,7 @@ const ExpectedDepositReturnsStep1 = () => {
             formik.handleSubmit()
           }}
           style={{ width: '100%' }}
-          disabled={
-            uploadedImages < formik.values?.sealList.length + formik.values?.noticeList.length
-          }
+          disabled={uploadedImages < formik.values?.sealList.length}
         />
       </Grid>
     </Grid>
