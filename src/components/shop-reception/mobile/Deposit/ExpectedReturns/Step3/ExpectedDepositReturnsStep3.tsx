@@ -19,6 +19,7 @@ import { useFormik } from 'formik'
 import { useState } from 'react'
 import ImageUpload from 'components/shop-reception/mobile/Common/ImageUpload/ImageUpload'
 import AlertModal from 'components/shop-reception/mobile/Common/AlertModal/AlertModal'
+import { toConfiormSupportPayload } from './serializers'
 
 const ExpectedDepositReturnsStep3 = () => {
   const location = useLocation()
@@ -55,7 +56,13 @@ const ExpectedDepositReturnsStep3 = () => {
       const response = await makeCoreGetRequest(
         `/shop-reception-mobile/truck/deposit/return/all-supports/${item.id}`
       )
-      return response || []
+      return (
+        response?.map(item => ({
+          label: item.supportTypeNameAndCode,
+          value: item,
+          supportCode: item.supportCode
+        })) || []
+      )
     },
     {
       onError: error => {
@@ -70,7 +77,7 @@ const ExpectedDepositReturnsStep3 = () => {
   const confirmSupportList = async (values: any) => {
     await makeCorePostRequest(
       `/shop-reception-mobile/truck/deposit/return/confirm-supports`,
-      values
+      toConfiormSupportPayload(values)
     )
   }
 
@@ -190,13 +197,13 @@ const ExpectedDepositReturnsStep3 = () => {
         <Autocomplete
           variant="outlined"
           label="Adauga ambalaj"
-          options={
-            allSupportList?.map(item => ({ label: item.supportTypeNameAndCode, value: item })) || []
-          }
+          options={allSupportList}
           onChange={(event, option) => {
-            const isExistent = formik.values?.supportList?.some(item => item.id === option.value.id)
+            const isExistent = formik.values?.supportList?.some(
+              item => item.supportCode === option.value.supportCode
+            )
             !isExistent &&
-              formik.setFieldValue('supportList', [...formik.values.supportList, option.value])
+              formik.setFieldValue('supportList', [...formik.values.supportList, { ...option.value, id: 0 } ])
             setPackageValue(null)
           }}
           value={packageValue}
