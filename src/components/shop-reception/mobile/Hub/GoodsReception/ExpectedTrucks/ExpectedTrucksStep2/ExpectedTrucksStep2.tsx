@@ -78,22 +78,38 @@ const ExpectedTrucksStep2 = () => {
   return (
     <Grid container spacing={2} justifyContent={'center'}>
       <TitleHeader title="" />
-      <Grid xs={10} item display="flex" justifyContent="center">
-        <Typography component="p" variant="medium" style={{ textAlign: 'center', color: 'black' }}>
-          Numar inmatriculare: {truck.truckNumber}
-        </Typography>
-      </Grid>
-      <Grid xs={10} item display="flex" justifyContent="center">
-        <Typography component="p" variant="medium" style={{ textAlign: 'center', color: 'black' }}>
-          Bon livrare: {truck.ticketCodeList.join(', ')}
-        </Typography>
-      </Grid>
-      <Grid xs={10} item display="flex" justifyContent="center">
-        <Typography component="p" variant="medium" style={{ textAlign: 'center', color: 'black' }}>
-          Confirm documentele pentru depozit:{' '}
-          {truck.depositDocumentList.map(truck => truck.depositName).join(', ')}
-        </Typography>
-      </Grid>
+      {truck && (
+        <>
+          <Grid xs={10} item display="flex" justifyContent="center">
+            <Typography
+              component="p"
+              variant="medium"
+              style={{ textAlign: 'center', color: 'black' }}
+            >
+              Numar inmatriculare: {truck.truckNumber}
+            </Typography>
+          </Grid>
+          <Grid xs={10} item display="flex" justifyContent="center">
+            <Typography
+              component="p"
+              variant="medium"
+              style={{ textAlign: 'center', color: 'black' }}
+            >
+              Bon livrare: {truck.ticketCodeList.join(', ')}
+            </Typography>
+          </Grid>
+          <Grid xs={10} item display="flex" justifyContent="center">
+            <Typography
+              component="p"
+              variant="medium"
+              style={{ textAlign: 'center', color: 'black' }}
+            >
+              Confirm documentele pentru depozit:{' '}
+              {truck.depositDocumentList.map(truck => truck.depositName).join(', ')}
+            </Typography>
+          </Grid>
+        </>
+      )}
 
       <Grid xs={10} item>
         <Autocomplete
@@ -103,10 +119,13 @@ const ExpectedTrucksStep2 = () => {
           options={[
             { label: 'Da', value: 'true' },
             { label: 'Nu', value: 'false' },
-            { label: 'Nu e cazul', value: 'false' }
+            { label: 'Nu e cazul', value: 'none' }
           ]}
           onChange={(event, option) =>
-            formik.setFieldValue(`depositDocumentList[0].hasNotice`, toBoolean(option.value))
+            formik.setFieldValue(
+              `depositDocumentList[0].hasNotice`,
+              option.value === 'none' ? null : toBoolean(option.value)
+            )
           }
           defaultValue={null}
         />
@@ -119,10 +138,13 @@ const ExpectedTrucksStep2 = () => {
           options={[
             { label: 'Da', value: 'true' },
             { label: 'Nu', value: 'false' },
-            { label: 'Nu e cazul', value: 'false' }
+            { label: 'Nu e cazul', value: 'none' }
           ]}
           onChange={(event, option) =>
-            formik.setFieldValue(`depositDocumentList[0].hasTransportNote`, toBoolean(option.value))
+            formik.setFieldValue(
+              `depositDocumentList[0].hasTransportNote`,
+              option.value === 'none' ? null : toBoolean(option.value)
+            )
           }
           defaultValue={null}
         />
@@ -135,34 +157,39 @@ const ExpectedTrucksStep2 = () => {
           options={[
             { label: 'Da', value: 'true' },
             { label: 'Nu', value: 'false' },
-            { label: 'Nu e cazul', value: 'false' }
+            { label: 'Nu e cazul', value: 'none' }
           ]}
           onChange={(event, option) =>
-            formik.setFieldValue(`theormodiagramConform`, toBoolean(option.value))
+            formik.setFieldValue(
+              `theormodiagramConform`,
+              option.value === 'none' ? null : toBoolean(option.value)
+            )
           }
           defaultValue={null}
         />
       </Grid>
       <Grid item xs={2} display="flex" justifyContent={'center'} alignItems={'center'}>
-        <ImageUpload
-          uploadUrl={`/shop-reception-mobile/truck/hub/upload/in_thermodiagram/${item.value}`}
-          onSuccess={() => {
-            showNotification({
-              message: `Imaginea a fost incarcata cu succes.`,
-              type: 'success'
-            })
-            setIsImageUploaded(true)
-          }}
-          onError={() =>
-            showNotification({
-              message: `A aparut o eroare la incarcarea imaginii.}`,
-              type: 'error'
-            })
-          }
-        />
+        {formik.values.theormodiagramConform !== null && (
+          <ImageUpload
+            uploadUrl={`/shop-reception-mobile/truck/hub/upload/in_thermodiagram/${item.value}`}
+            onSuccess={() => {
+              showNotification({
+                message: `Imaginea a fost incarcata cu succes.`,
+                type: 'success'
+              })
+              setIsImageUploaded(true)
+            }}
+            onError={() =>
+              showNotification({
+                message: `A aparut o eroare la incarcarea imaginii.}`,
+                type: 'error'
+              })
+            }
+          />
+        )}
       </Grid>
 
-      {formik.values.theormodiagramConform == false && (
+      {formik.values.theormodiagramConform === false && (
         <Grid xs={10} item>
           <Input
             type="number"
@@ -184,7 +211,7 @@ const ExpectedTrucksStep2 = () => {
           onClick={() => formik.handleSubmit()}
           style={{ width: '100%' }}
           disabled={
-            isImageUploaded === null ||
+            (formik.values.theormodiagramConform !== null && isImageUploaded === null)  ||
             (formik.values.theormodiagramConform === false
               ? formik.values.shopTemperature == null ||
                 typeof formik.values.shopTemperature == 'undefined' ||

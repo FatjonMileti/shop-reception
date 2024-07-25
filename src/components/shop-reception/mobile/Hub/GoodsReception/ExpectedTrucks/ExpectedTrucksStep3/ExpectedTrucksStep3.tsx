@@ -25,6 +25,7 @@ const ExpectedTrucksStep3 = () => {
   const [isAlertOpen, setIsAlertOpen] = useState(false)
   const [supportType, setSupportType] = useState(null)
   const [reason, setReason] = useState(null)
+  const [refreshCounter, setRefreshCounter] = useState(false)
 
   const { data: hubName, isLoading: isLoadingHubName } = useQuery(
     ['hub-name'],
@@ -43,7 +44,7 @@ const ExpectedTrucksStep3 = () => {
   )
 
   const { data: counter, isLoading: isCounterLoading } = useQuery(
-    ['counter'],
+    ['counter', refreshCounter],
     async () => {
       const response = await makeCoreGetRequest(
         `/shop-reception-mobile/support/hub/counter/${truckId}`
@@ -131,6 +132,8 @@ const ExpectedTrucksStep3 = () => {
         type: 'success'
       })
       resetScanData()
+      setSupportCode(null)
+      setRefreshCounter(!refreshCounter)
     },
     onError: res => {
       showNotification({
@@ -155,7 +158,9 @@ const ExpectedTrucksStep3 = () => {
 
   useEffect(() => {
     if (typeOptions && formik.values.supportTypeId) {
-      const supportTypeOption = typeOptions.find(option => formik.values.supportTypeId === option.value)
+      const supportTypeOption = typeOptions.find(
+        option => formik.values.supportTypeId === option.value
+      )
       setSupportType(supportTypeOption)
     }
   }, [typeOptions, formik.values.supportTypeId])
@@ -246,7 +251,11 @@ const ExpectedTrucksStep3 = () => {
                 { label: 'Nu', value: 'false' }
               ]}
               onChange={(event, option) => formik.setFieldValue('defect', !toBoolean(option.value))}
-              value={formik.values.defect ? { label: 'Nu', value: 'false' } : { label: 'Da', value: 'true' }}
+              value={
+                formik.values.defect
+                  ? { label: 'Nu', value: 'false' }
+                  : { label: 'Da', value: 'true' }
+              }
             />
           </Grid>
 
@@ -294,14 +303,14 @@ const ExpectedTrucksStep3 = () => {
                   uploadUrl={`/shop-reception-mobile/support/shop/upload/${scanCodeData?.supportId}`}
                   onSuccess={() => {
                     showNotification({
-                      message: "Imaginea a fost incarcata cu succes.",
+                      message: 'Imaginea a fost incarcata cu succes.',
                       type: 'success'
                     })
                     setIsSupportImageUploaded(true)
                   }}
                   onError={() =>
                     showNotification({
-                      message: "A aparut o eroare la incarcarea imaginii.",
+                      message: 'A aparut o eroare la incarcarea imaginii.',
                       type: 'error'
                     })
                   }

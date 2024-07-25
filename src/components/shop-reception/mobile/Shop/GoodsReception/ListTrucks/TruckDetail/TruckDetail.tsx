@@ -299,16 +299,18 @@ const TruckDetail = () => {
                 helperText={formik.errors.thermodiagramConform as string}
               />
             </Grid>
-            <Grid item xs={12} style={{ marginTop: '24px' }}>
-              <ImageUpload
-                uploadUrl={
-                  '/shop-reception-mobile/truck/shop/upload-shop/reception_thermodiagram/' + id
-                }
-                onSuccess={handleThermodiagramUploadSuccess}
-                onError={handleError}
-                btnStyle={{ position: 'absolute', right: 0, top: '42px' }}
-              />
-            </Grid>
+            {(formik.values.thermodiagramConform !== 'none' && formik.values.thermodiagramConform !== null)  && (
+              <Grid item xs={12} style={{ marginTop: '24px' }}>
+                <ImageUpload
+                  uploadUrl={
+                    '/shop-reception-mobile/truck/shop/upload-shop/reception_thermodiagram/' + id
+                  }
+                  onSuccess={handleThermodiagramUploadSuccess}
+                  onError={handleError}
+                  btnStyle={{ position: 'absolute', right: 0, top: '42px' }}
+                />
+              </Grid>
+            )}
           </Grid>
         </Grid>
         {formik.values.thermodiagramConform === 'false' && (

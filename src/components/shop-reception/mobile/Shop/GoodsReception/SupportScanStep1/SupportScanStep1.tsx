@@ -238,6 +238,13 @@ const SupportScanStep1 = () => {
           supportCode: formik.values?.supportCode
         }
       )
+      if (result.errorMessage) {
+        showNotification({
+          message: `A aparut o eroare la cautarea codului. ${result.errorMessage}`,
+          type: 'error'
+        })
+        return
+      }
       setSupportNumber(result.supportNumber)
       setSupportId(result.supportId)
       setSupportTypeId(result.supportTypeId)
