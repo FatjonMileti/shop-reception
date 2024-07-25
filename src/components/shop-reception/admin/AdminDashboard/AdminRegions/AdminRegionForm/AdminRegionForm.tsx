@@ -23,7 +23,7 @@ const AdminRegionForm: React.FC<NewAdminDepositProps> = props => {
   const { showNotification } = useNotification()
 
   const mutateHub = async values => {
-    editItem
+    isEdit
       ? await makeCorePutRequest(`/shop-reception/regions/${editItem.id}`, values)
       : await makeCorePostRequest('/shop-reception/regions', values)
   }

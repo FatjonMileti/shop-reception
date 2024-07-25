@@ -261,7 +261,6 @@ export const drawerFilters = (
         variant="outlined"
         label="Selectează loc de incarcare"
         options={locationOptions || []}
-        multiple
       />
     ),
     type: 'autocomplete',

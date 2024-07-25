@@ -27,9 +27,10 @@ export const columns = [
   },
   {
     title: 'Status',
-    field: 'statusValue',
+    field: 'status',
     align: 'left',
-    type: 'string'
+    type: 'string',
+    render: row => row.statusValue
   },
   {
     title: 'Cod cursă',
