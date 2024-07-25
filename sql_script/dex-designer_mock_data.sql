@@ -397,6 +397,8 @@ VALUES
     (239, 'Înregistrare retur', '', '/shop-reception/mobile/return-step-4', true, 189, false),
     (240, 'Înregistrare retur', '', '/shop-reception/mobile/return-step-5', true, 189, false),
     (241, 'Continuare retur', '', '/shop-reception/mobile/inProgressReturns', true, 190, true),
+    (207, 'Adauga camion', '', '/shop-reception/mobile/addTruck', true, 187, false),
+    (224, 'Adauga camion', '', '/shop-reception/mobile/add-trucks/step-2', true, 187, false),
 
     -- hub - 179, 180, 181, 182
     (350, 'Camioane asteptate', '', '/shop-reception/mobile/expectedTrucks', true, 179, true),
@@ -406,8 +408,6 @@ VALUES
     (355, 'Receptie camion', '', '/shop-reception/mobile/expectedTrucks-step-5', true, 179, false),
     (356, 'Receptie camion', '', '/shop-reception/mobile/expectedTrucks-step-6', true, 179, false),
     (380, 'Camioane asteptate', '', '/shop-reception/mobile/inProcessTrucks', true, 300, true),
-    (207, 'Adauga camion', '', '/shop-reception/mobile/addTruck', true, 179, false),
-    (224, 'Adauga camion', '', '/shop-reception/mobile/add-trucks/step-2', true, 179, false),
     (196, 'Inregistreaza camion', '', '/shop-reception/mobile/registerTruck', true, 180, true),
     (351, 'Inregistreaza camion', '', '/shop-reception/mobile/registerTruck-step-2', true, 180, false),
     (259, 'Inregistreaza camion', '', '/shop-reception/mobile/registerTruck-step-3', true, 180, false),
@@ -676,8 +676,8 @@ VALUES
 
     -- Shop Reception Mobile
     -- GG_RO_HQ_SHOP_RECEPTION_STORE
-    (202, 178), (202, 179), (202, 187), (202, 188),
-    (202, 193), (202, 189), (202, 190),
+    (202, 178), (202, 187), (202, 188), (202, 193),
+    (202, 189), (202, 190),
 
     -- GG_RO_HQ_SHOP_RECEPTION_BACKOFFICE
     (201, 178), (201, 187), (201, 188), (201, 193),

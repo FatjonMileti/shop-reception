@@ -101,8 +101,8 @@ const ExpectedDepositReturnsStep4 = () => {
               <TableRow>
                 <TableCell>{item.supportCode}</TableCell>
                 <TableCell>{item.supportTypeName}</TableCell>
-                <TableCell>{item.confirmedSupportNumber}</TableCell>
                 <TableCell>{item.supportNumber}</TableCell>
+                <TableCell>{item.confirmedSupportNumber}</TableCell>
               </TableRow>
             ))}
           </TableBody>
